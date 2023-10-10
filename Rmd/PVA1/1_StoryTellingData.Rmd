@@ -153,6 +153,31 @@ class: left
 
 ## Storytelling with Data 
 
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-height: '90%'
+knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/0/0b/1913_Piqua_Ohio_Advertisement_-_One_Look_Is_Worth_a_Thousand_Words.jpg')
+```
+
+.quelle[Source: [wikipedia.org](https://en.wikipedia.org/wiki/A_picture_is_worth_a_thousand_words)]
+
+
+???
+
+* Bekanntes Sprichwort
+* Ursprung nicht ganz klar, eine der ersten kommerziellen Verwendungen durch einen Autozubehörhändler.
+* Bild zeigt eine Zeitungsanzeige. Ironie: Nur Worte statt Bilder. Aber es geht darum, dass man beim Händler vorbeischauen soll, um die Teile (bspw. Reifen) anzuschauen oder anschauen zu lassen.
+
+---
+name: sampleslide
+class: left
+
+.blockquote[What is story telling]
+
+## Storytelling with Data 
+
 * What Is Data Storytelling?
   * Data storytelling harnesses the power of data to capture our imagination, without overloading us with dry numbers and statistics.
   * It’s a powerful mixture: data “nuggets” are transformed into imaginative visuals to tell a compelling story
@@ -462,8 +487,35 @@ class: left
 
 * narrative
 
----
 
+---
+name: tufte
+class: left
+
+
+
+## Tufte's Principles
+
+
+.pull-left[
+* Above all else show data.
+* Maximize the data-ink ratio.
+* Erase non-data-ink.
+* Erase redundant data-ink.
+* Revise and edit of data-ink
+]
+.pull-right[
+```{r}
+#| echo: false
+#| out-width: '45%'
+knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Edward_Tufte_-_cropped.jpg/330px-Edward_Tufte_-_cropped.jpg')
+```
+]
+
+
+
+
+---
 name: sampleslide
 class: left
 
@@ -902,11 +954,11 @@ class: left
 
 .blockquote[Great graphical examples]
 
-## The StoryTelling challenge
+## The SwD-Challenge
 ```{r}
 #| echo: false
 #| fig-align: 'center'
-knitr::include_url("https://community.storytellingwithdata.com/challenges/sep-2023-makeover-magic", height = '460px')
+knitr::include_url("https://community.storytellingwithdata.com/exercises/good-to-great", height = '460px')
 ``` 
 ---
 

@@ -1,5 +1,5 @@
-library(readxl) # Import von MS Excel Dateien
 library(tidyverse) # Metapaket für den gesamten Prozess eines Datenprojekts
+library(readxl) # Import von MS Excel Dateien
 library(glue) # praktische Funktion zum verketten von Zeichen
 library(janitor) # verschieden praktische Funktionen für DataWrangling, bspw. clean_names()
 library(kableExtra) # Paket zur Erstellung von Tabellen in Publikationsqualität
@@ -9,8 +9,3 @@ library(scales) # Paket mit Funktionen zur Formatierung von Zahlen (bspw. Prozen
 library(hrbrthemes)# Vorgefertigte Layouts ergänzend zu den ggplot-themes
 library(extrafont) # Paket zur Nutzung weiterer Schriftarten
 
-
-# Teil 2 -----
-
-library(infer) # Paket mit eigenem Workflow zum Sampling und Testen
-library(moderndive) # Paket zur Lehrveranstaltung von Ismay/Kim, aufbauend auf dem infer-Paket
