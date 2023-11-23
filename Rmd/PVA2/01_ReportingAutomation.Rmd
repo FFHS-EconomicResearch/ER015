@@ -585,7 +585,7 @@ x+2
   * ...Tastenkombination `Ctrl + Alt + I` (macOS `Cmd + Option + I`) oder...
 ]
 .small[
-  * ...in Quarto über das Dropdownmenu `Insert`
+  * ...in Quarto über das Dropdownmenu `Insert > Executable Cell`
 ]
 * Für die Auswertung der Code-Blöcke und die Darstellung im Ausgabedokument gibt es verschiedene [Optionen](#chunk-opts).
 ]
@@ -914,6 +914,25 @@ knitr::include_graphics(xfun::from_root('img','PVA2','FelixAnalytix.PNG'))
 .quelle[Anleitung auf [medium.com.](https://felixanalytix.medium.com/how-to-make-beautiful-tables-using-r-programming-35d75cc919fb)]
 
 
+---
+class: left
+
+.blockquote[Text und Formatierung]
+
+## Diagramme
+
+* Funktionen für die Erstellung von *Flußdiagrammen* und grafische Darstellungen von *Netzwerken* sind mit dem [**DiagrammeR**](https://rich-iannone.github.io/DiagrammeR/)-Paket möglich.
+
+```{r}
+#| echo: false
+#| out-width: '50%'
+#| fig-align: 'center'
+knitr::include_graphics('https://rich-iannone.github.io/DiagrammeR/reference/figures/e_graph.png')
+```
+
+* Alternative Pakete (Auswahl): nomnoml, diagram, dagitty, ggdag, plantuml
+
+* In Quarto kann außerdem über das Dopdownmenu `Insert > Executable Cell` auf die Softwarelösungen **mermaid** und **Graphviz** zurückgegriffen werden.
 
 ---
 class: left
