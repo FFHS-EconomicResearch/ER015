@@ -906,7 +906,8 @@ class: left
 
 ```{r}
 #| echo: false
-#| out-width: '90%'
+#| fig-align: 'center'
+#| out-width: '75%'
 knitr::include_graphics(xfun::from_root('img','PVA2','FelixAnalytix.PNG'))
 ```
 
