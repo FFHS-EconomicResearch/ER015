@@ -1,0 +1,149 @@
+---
+title: "Zotero und RMarkdown"
+author: "Prof. Dr. Jörg Schoder"
+date: "2023-10-28"
+bibliography: ../../lit/Statistics.json
+reference-section-title: Quellenverzeichnis
+output:
+    html_document:
+      css: ../../css/styles.css
+      code_folding: hide
+      number_section: true
+      toc: true
+      toc_float: true
+      toc_depth: 3
+---
+
+```{r setup, echo=FALSE,message=FALSE,warning=FALSE}
+source(xfun::from_root("R/00_setup.R"))
+library(fontawesome)
+```
+
+# Installationen
+
+Für das Verfassen wissenschaftlicher Arbeiten (in Ihrem Fall Studienjahresarbeiten und Bachelorarbeit) ist die Verwendung von Software zur Literaturverwaltung quasi unverzichtbar. Es gibt diverse empfehlenswerte Produkte am Markt, darunter auch kostenlose Programme. Sollten Sie noch kein Programm installiert und genutzt haben, wird die kostenlose Software Zotero empfohlen. Zotero gibt es in Versionen für verschiedene Plattformen (Windows-PC, Apple MacOS und Linux). Dabei kann Zotero sowohl für das Arbeiten in Microsoft Office bzw. MS Word als auch in R Studio in Verbindung mit R Markdown genutzt werden.  
+
+  
+
+Sollten Sie bereits eine andere Software (bspw. Mendeley, Citavi...) nutzen, gibt es zwei Möglichkeiten  
+
+Sie binden diese Software in RStudio ein (dazu finden Sie Anleitungen im www) oder  
+
+Sie migrieren Ihre Inhalte in Zotero  
+
+  
+
+## Installation Zotero  
+
+Zur Installation von Zotero befolgen Sie die folgenden Schritte:  
+
+Download des Installers auf der [Zotero website](http://www.zotero.org/)
+
+Erstellen eines kostenlosen Accounts  
+
+  
+
+## Installation praktischer Zusatztools zur Nutzung von Zotero  
+
+Die Literaturverwaltung mit Zotero kann durch folgende Zusatztools noch komfortabler werden. Befolgen Sie zur Installation folgende Schritte:  
+
+Installieren Sie in Ihrer Zotero Desktop-App das Zusatzprogramm "**Better BibTex for Zotero**". Folgen Sie dazu der Anleitung auf der [BetterBibtex Webseite](https://retorque.re/zotero-better-bibtex/installation/).   
+
+Installieren Sie den für Ihren Browser (unterstützt werden derzeit Chrome, Edge, Safari und Firefox) [Zotero-Connector](http://www.zotero.org/download/connectors), um Quellen direkt aus dem Browser in Ihre Bibliothek importieren zu können. 
+
+
+# Integration von Zotero in RStudio   
+
+Zur Einbindung Zotero in RStudio befolgen Sie die folgenden Schritte:  
+
+Geben Sie in der Console folgenden Befehl ein:  
+
+```
+remotes::install_github("paleolimbot/rbbt")  
+```
+  
+
+Schließen Sie RStudio nach der Installation und starten Sie das Programm neu  
+
+Prüfen Sie, ob Zotero nun in den Addins zu finden ist. Prüfen Sie außerdem, dass Ihre .Rmd- Dateien stets mit UTF8 encoding erstellt werden.  
+
+  
+
+Hinweis: Sie können Zotero auch direkt in MS-Word nutzen. Nach Installation von Zotero wird in Word ein Reiter "Zotero" erscheinen.
+
+
+# Literaturverwaltung mit Zotero  
+
+Die Zotero-Website bietet eine übersichtliche [Einführung](https://www.zotero.org/support/quick_start_guide) in die Funktionen des Programms.  
+
+Der Aufbau einer Literaturdatenbank kann händisch durch Eingabe sämtlicher bibliographischer Informationen (also Autor(en), Herausgeber, Verlag, Ort, Jahr, Fachzeitschrift, Band, Auflage, Seiten etc.) erfolgen. Zotero bietet jedoch zahlreiche Alternativen zu dieser eher mühsamen Variente. Eine Übersicht findet sich im [Zotero-Quick-Start-Guide](https://www.zotero.org/support/quick_start_guide#collect) unter "collect". Hier sollen zwei der komfortabelsten Wege vorgestellt werden: 
+
+a. Sie öffnen die Desktop-App von Zotero und nutzen die Möglichkeit zur **Eingabe per Identifier**. Identifier können bspw. ISBN-Nummern oder DOI-links sein. Um die Eingabe per Identifier zu starten müssen Sie nur auf den **Zauberstab** klicken.  
+
+b. Alternativ (aber durchaus fehleranfällig!) können Sie **direkt aus Ihrem Web-Browser** die entsprechenden Daten in Ihre Zotero-Datenbank importieren. Voraussetzung ist, dass Sie wie unter Installation erläutert, das Browser-Plugin für Zotero (passend für den von Ihnen genutzten Browser) installiert haben. Dann können Sie einfach auf das **Zotero-Icon in Ihrem Browser** klicken, wenn Sie auf einer entsprechenden Webseite sind. Sie sollten auch bei dieser Variante die Zotero-Desktop-App geöffnet haben.  
+
+Zotero bietet **vielfältige Möglichkeiten**, Ihre [Bibliothek zu organisieren](https://www.zotero.org/support/quick_start_guide#organize) bzw. übersichtlich zu halten. Bspw. mit Hilfe von Collections (ähnlich wie Playlists in einer Musik-App)  
+
+Um die Einträge der Bibliothek komfortabel in Ihrem bevorzugten Textverarbeitungs-Programm (Word oder RStudio/RMarkdown) zu nutzen, müssen für alle Einträge in der Datenbank Schüsselvariablen (**ID-keys**) erstellt werden. Diese können Sie selbst festlegen oder automatisch erstellen lassen. In jedem Fall empfiehlt es sich ein ID-key-Formt zu wählen, das Sie sich intuitiv merken können - nur so können Sie im Textverarbeitungsprogramm dann die Quelle direkt referenzieren, ohne den key jedes mal nachschauen zu müssen.  
+
+  
+
+Beispiel:  Für das Diskussionspapier von Jörg Schoder zur Messung von Ungleichheit mit ordinalen Daten aus dem Jahr 2014 könnte der key schoder_2014 definiert werden. Jedes mal, wenn Sie das Papier dann in Ihrer Arbeit zitieren möchten, genügt die Eingabe dieses keys (in Word wie in RMarkdown).  
+
+  
+
+Für die automatisierte Erstellung von ID-keys haben Sie oben bereits das BetterBibtex-Plugin in Zotero eingebunden. Wenn Sie den Standard key nicht mögen, können Sie auf der [BetterBibtex-Webseite](https://retorque.re/zotero-better-bibtex/citing/) Hinweise zur automatischen Erzeugung im von Ihnen gewünschten Format finden.  
+# Erstellen eines Literaturverzeichnisses in R Markdown/RStudio  
+
+ Erstellen Sie eine Bibliographie in Zotero.  
+
+ Klicken Sie dazu auf  
+
+```
+Datei > Bibliothek exportieren   
+```
+
+Wählen Sie dann CSL JSON (grundsätzlich sind auch andere Ausgabeformate, wie bspw. BibLaTex möglich, aber CSL JSON wird sich wohl weiter durchsetzen)  
+
+Speichern Sie die Datei im Rmd-Ordner Ihres jeweiligen R-Projekts, bspw. unter dem Namen              
+
+```
+my_bib.json  
+```
+
+ Geben Sie im YAML-Kopf die beiden folgenden Zeilen ein, um das Literaturverzeichnis für Ihre .Rmd-Dokument automatisch zu erstellen.  
+
+```
+bibliography: my_bib.json  
+
+reference-section-title: Quellenverzeichnis  
+```
+
+Obs! Hinter reference-section-title: geben Sie an, wie die Überschrift Ihres Quellenverzeichnisses lauten soll (hier: "Quellenverzeichnis"). Alternativ könnten sie bspw. auch "Literaturverzeichnis" oder nur "Literatur" o.ä. wählen.  
+
+Wenn die Ausgabe im MS-Word-Format erfolgen soll, können Sie eine Word-Vorlage erstellen, um die Ausgabe direkt in der für Ihre Arbeit passenden Formatierung ausgeben zu lassen. Hinweis dazu finden Sie bspw. auf der [RStudio-Webseite](https://rmarkdown.rstudio.com/articles_docx.html).  
+
+  
+
+In Ihrem Text können Sie nun das o.a. Diskussionspapier von Schoder (2014) durch Eingabe von   
+
+`@schoder_2014`  
+
+einbinden. Wenn Sie den YAML-Kopf wie in Punkt 2 modifziert haben und nun das .Rmd knitten, wird automatisch das Literaturverzeichnis am Ende Ihrer Ausgabedatei erstellt. Probieren Sie es aus!
+
+
+# Übungsaufgabe
+
+1. Gehen Sie in Ihrem Browser auf die Seite https://moderndive.com/index.html und klicken Sie auf das Zotero-Icon im Browser. In der Zotero-App werden die Quellenangaben vollständig hinterlegt.   
+
+2. Suchen Sie anschließend einen beliebigen Artikel aus einer wissenschaftlichen Fachzeitschrift, der sich für Sie interessant anhört. Nehmen Sie diesen analog in Ihre Zotero-Bibliothek auf.   
+
+3. Erstellen Sie ein neues R-Projekt "Zotero-Basics". Öffnen Sie eine neue Rmd-Datei und speichern Sie diese im Rmd-Ordner Ihres Projekts unter dem Namen "MyFirstBib.Rmd"   
+
+4. Erzeugen Sie eine Bibliographie in Zotero im CSL-JSON-Format (vgl. Erläuterungen im Kursnotizbuch) und speichern Sie die Datei mit Namen "my_bib.json" ebenfalls im Rmd-Ordner Ihres R-Projekts.  
+
+5. Schreiben Sie zu jedem der beiden o.a. Einträge in Ihrer Bibliothek einen kurzen Satz, bspw. worum es bei den Quellen geht und fügen Sie am Ende die Referenz mittels ID-key ein (bspw. `@schoder_2014`)   
+
+6. Modifizieren Sie den YAML-Kopf, sodass automatisch ein Literaturverzeichnis erstellt wird.  
+
+7. Knitten Sie das Dokument und betrachten Sie Ihr Ergebnis.  

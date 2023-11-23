@@ -1,0 +1,251 @@
+---
+title: "Storytelling with Data"
+subtitle: "Datenimport mit APIs"
+author: "Prof. Dr. Jörg Schoder"
+institute: "FFHS" 
+date: "`r Sys.Date()`"
+bibliography: ../../lit/my_bib.json
+reference-section-title: Quellenverzeichnis
+output:
+  xaringan::moon_reader:
+    self_contained: true
+    css: 
+         - default
+         - ../../css/ffhs-theme_js.css
+         - xaringan-themer.css
+    includes:
+      after_body: ../../css/insert-logo.html
+    lib_dir: ../../libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+    
+
+    
+---
+class: title-slide
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+style_xaringan(text_color = "#d50006",inverse_text_color = "#FFFFFF",inverse_background_color = "#d50006", title_slide_background_color = "#d50006",header_background_color = "#d50006",header_color = "#FFFFFF",header_h1_font_size = "32px",
+  header_h2_font_size = "26px",link_color="#502479",
+  header_h3_font_size = "20px",text_slide_number_color = "#d50006",text_slide_number_font_size = "0.5em")
+```
+
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_progress_bar(color = "#d50006", location = "bottom")
+xaringanExtra::use_xaringan_extra(c("tile_view","scribble","panelset","tachyons"))
+xaringanExtra::style_panelset_tabs(font_family = "inherit")
+#xaringanExtra::use_search(show_icon = TRUE)
+#weitere: "share_again","animate_css", "webcam","freezeframe","clipboard","fit_screen","extra-styles" 
+xaringanExtra::use_editable(expires = 1)
+xaringanExtra::use_freezeframe(trigger = "hover")
+``` 
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(latex2exp)
+library(fontawesome)
+```
+
+# ER015 - Storytelling with Data
+
+## PVA2
+
+### Reporting und Automatisierung. Teil 2.
+
+ 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+### HS 2023 
+<br>
+### Prof. Dr. Jörg Schoder
+.mycontacts[
+`r fa('github')` @FFHS-EconomicResearch
+`r fa('linkedin')` @jfschoder
+]
+
+
+---
+layout: true
+
+<div class="my-footer"></div>       
+
+<div style="position: absolute;left:400px;bottom:10px;font-size:9px">`r r2symbols::sym('copyright')``r rmarkdown::metadata$author`</div>
+
+
+---
+name: agenda
+class: left
+
+.blockquote[Agenda]
+
+## Datenimport
+
+
+* Motivation und Einordnung
+
+* Datenimport lokaler Dateien
+
+* **Übung**
+
+* Programmierschnittstellen (APIs)
+
+* **Übung**
+
+
+---
+
+class: inverse, center, middle
+
+
+# Datenimport lokaler Dateien
+
+.blockquote[Dateiformate und Funktionen]
+
+.blockquote[Übung]
+
+
+---
+class: left
+
+.blockquote[Dateiformate und Funktionen]
+
+## Gängige Dateiformate
+
+- `r fa('r-project')`-Formate (.Rdata, .rds)
+- MS-Excel (.xlsx)
+- comma-separated values (.csv)
+- tab-separated values (.tsv)
+- SPSS (.sav)
+- xml-Format (.xml)
+- ...
+
+
+---
+class: left
+
+.blockquote[Dateiformate und Funktionen]
+
+## Ausgewählte Funktionen und Pakete
+
+* Die `r fa('r-project')`-Formate können in der Regel direkt mit der `load()`-Funktion geladen werden.
+
+* Import anderer Formate mit diversen Funktionen, die zum Teil nicht in Base R enthalten sind.
+
+* Empfehlenswerte (*tidy*-kompatible) Pakete für gängige Dateiformate:
+
+* **readr** (wird mit dem tidyverse-Metapaket geladen) für .txt- und .csv-Dateien
+* **readxl** für .xlsx-Dateien
+* **googlesheets4** (**googledrive**) für Google Sheets (Google Drive) Dateien,
+* **haven** für SPSS/Stata/SAS Dateiformate,  
+* **jsonlite** für JSON-Dateien und  
+* **xml2** für XML-Dateien 
+* **DBI** für relationale Datenbanken,  
+* **httr** für web APIs  
+* **rvest** für das Webscraping (Auslesen von Webseiten)
+* ...
+
+
+---
+class: left
+
+.blockquote[Übung]
+
+## Beispiel "Orbis-Unternehmensdatenbank"
+
+
+<iframe width="1100" height="400" src="https://www.youtube.com/embed/wynL15CRn88?si=SikAFxalzKV0EF0w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+* An der FFHS stehen die Daten [via Digitale Bibliothek](https://moodle.ffhs.ch/course/view.php?id=5#module-4502514) zur Verfügung.
+
+
+---
+class: left
+
+.blockquote[Übung]
+
+## Aufgabe
+
+1. Lege ein neues `r fa('r-project')`-Projekt mit dem Namen "EX-Orbis" an und erstelle bereits ein Verzeichnis "data" und ein Unterverzeichnis "raw"
+
+2. Besuche die Orbis [via Digitale Bibliothek](https://moodle.ffhs.ch/course/view.php?id=5#module-4502514), nutze die Suchmaske und exportiere beliebige Daten. Speichere die Datei im Projektordner "data/raw"
+
+3. Importiere die Daten in `r fa('r-project')` und ordne diese einem Objekt `tbl_orbis` zu.
+
+
+
+---
+class: inverse, center, middle
+
+# Nutzung von Programmierschnittstellen
+
+.blockquote[Grundlagen]
+
+.blockquote[Nützliche Pakete]
+
+.blockquote[Beispiele]
+
+.blockquote[Speichern und Exportieren]
+
+
+
+
+
+
+
+---
+name: tqget
+class: left
+
+.blockquote[Nutzung von APIs]
+
+## Beispiel: Finanzdaten
+
+```{r}
+#| label: tq-get
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+library(tidyverse)
+library(tidyquant)
+### Daten zu einem Wachstumsprozess laden ----
+tbl_prices <- tq_get(c("AAPL","AMZN"),
+                       get  = "stock.prices",
+                       from = "2022-01-01",
+                       to   = Sys.Date())
+
+tbl_prices %>%
+  ggplot(aes(x = date, y = adjusted, color=symbol)) +
+    geom_line()
+
+
+
+```
+
+
+---
+class: left
+
+.blockquote[Übung]
+
+## Aufgabe
+
+1. Installiere das **BFS**-Paket des Bundesamtes für Statistik durch folgende Eingabe in der Console:
+
+`install.packages('BFS')
+
+2. Nutze die Funktion `bfs_get_catalog_data(language = "de")` um einen Überblick über das Datenangebot zu erhalten. Ggf. sollte das Ergebnis in einem Objekt gespeichert werden, um es als Spreadsheet anschauen zu können.
+
+3. Importiere beliebige Daten in `r fa('r-project')` und ordne diese einem Objekt `tbl_bfs` zu.
+

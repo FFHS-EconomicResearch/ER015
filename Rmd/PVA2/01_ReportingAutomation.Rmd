@@ -1,0 +1,1140 @@
+---
+title: "Storytelling with Data"
+subtitle: "Reporting & Automation"
+author: "Prof. Dr. Jörg Schoder"
+institute: "FFHS" 
+date: "`r Sys.Date()`"
+bibliography: ../../lit/my_bib.json
+reference-section-title: Quellenverzeichnis
+output:
+  xaringan::moon_reader:
+    self_contained: true
+    css: 
+         - default
+         - ../../css/ffhs-theme_js.css
+         - xaringan-themer.css
+    includes:
+      after_body: ../../css/insert-logo.html
+    lib_dir: ../../libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+    
+
+    
+---
+class: title-slide
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+style_xaringan(text_color = "#d50006",inverse_text_color = "#FFFFFF",inverse_background_color = "#d50006", title_slide_background_color = "#d50006",header_background_color = "#d50006",header_color = "#FFFFFF",header_h1_font_size = "32px",
+  header_h2_font_size = "26px",link_color="#502479",
+  header_h3_font_size = "20px",text_slide_number_color = "#d50006",text_slide_number_font_size = "0.5em")
+```
+
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_progress_bar(color = "#d50006", location = "bottom")
+xaringanExtra::use_xaringan_extra(c("tile_view","scribble","panelset","tachyons"))
+xaringanExtra::style_panelset_tabs(font_family = "inherit")
+#xaringanExtra::use_search(show_icon = TRUE)
+#weitere: "share_again","animate_css", "webcam","freezeframe","clipboard","fit_screen","extra-styles" 
+xaringanExtra::use_editable(expires = 1)
+xaringanExtra::use_freezeframe(trigger = "hover")
+``` 
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(latex2exp)
+library(fontawesome)
+library(emo)
+```
+
+# ER015 - Storytelling with Data
+
+## PVA2
+
+### Reporting und Automatisierung. Teil 1.
+
+ 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+### HS 2023 
+<br>
+### Prof. Dr. Jörg Schoder
+.mycontacts[
+`r fa('github')` @FFHS-EconomicResearch
+`r fa('linkedin')` @jfschoder
+]
+
+
+---
+layout: true
+
+<div class="my-footer"></div>       
+
+<div style="position: absolute;left:400px;bottom:10px;font-size:9px">`r r2symbols::sym('copyright')``r rmarkdown::metadata$author`</div>
+
+
+---
+name: agenda
+class: left
+
+.blockquote[Agenda]
+
+## Reporting und Automatisierung
+
+
+* Motivation und Einordnung
+
+* Kurze Einführung in RMarkdown und Quarto
+
+* **Übung**
+
+* Kollaborative Forschung mit Git
+
+
+
+
+---
+class: inverse, center, middle
+
+
+# Motivation und Einordnung
+
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+.blockquote[Praxisbeispiel Airbnb]
+
+.blockquote[Einordnung Workflow Datenprojekte]
+
+
+
+---
+class: left
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+## Refresher ER013: Was ist Wissenschaft?
+
+
+.pull-left[
+
+```{r}
+#| label: kant
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '50%'
+knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/4/43/Immanuel_Kant_%28painted_portrait%29.jpg')
+```
+]
+
+
+.pull-right[
+
+.blockquote[
+"Habe den Mut, dich deines eigenen Verstandes zu bedienen!"
+]
+]
+
+* Wissenschaft überzeugt durch Argumente, nicht durch Autorität (es geht nicht um **"glauben"**).
+
+* ~~Das~~ Ein Wesensmerkmal der Wissenschaft ist *Transparenz*.
+
+
+
+
+---
+class: left
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+## Reproduzierbarkeit erfordert Transparenz
+
+`r fa('circle-exclamation')` Ist ein Forschungsergebnis nicht reproduzierbar, sind wir zum (Nicht-)Glauben gezwungen. Das ist **keine** Wissenschaft.
+
+
+.blockquote[
+ reproducibility refers to the ability of a researcher to duplicate the results of a prior study using the same materials as were used by the original investigator.
+.tr[
+[Goodman/Fanelli/Ioannidis, 2017](https://www.science.org/doi/10.1126/scitranslmed.aaf5027)
+]]  
+
+
+* Forschungsbericht als **Kochrezept**: Bereitstellung aller Informationen, um ein Projekt möglichst genau "nachzukochen" zu können.
+
+
+* *Open Science*: Open data, open materials, open code, literate programming ...
+
+
+---
+class: left
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+## Beispiel: Open Data Projekt
+
+```{r}
+#| echo: false
+#| out-width: '70%'
+#| fig-align: 'center'
+knitr::include_graphics(xfun::from_root('img','PVA2','opendata_bfs.png'))
+```
+
+.quelle[Quelle: [Bundesamt für Statistik.](https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/ogd/portal.html)]
+
+---
+class: left
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+## Genügt Wissenschaft den eigenen Maßstäben?
+
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '70%'
+knitr::include_graphics('https://media.springernature.com/w300/springer-static/image/art%3A10.1038%2F533452a/MediaObjects/41586_2016_BF533452a_Figd_HTML.jpg')
+```
+
+.quelle[Quelle: [Baker (2016).](https://www.nature.com/articles/533452a)]
+
+
+
+---
+class: left
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+## In der Wirtschaft klappt das besser?
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '90%'
+knitr::include_graphics('https://www.valamis.com/wp-content/uploads/2022/09/knowledge-management-process.png')
+```
+
+.quelle[Quelle: [Valamis.com](https://www.valamis.com/hub/knowledge-management).]
+
+
+???
+
+* Bedeutung des Wissensmanagements im demografischen Wandel
+* Wissensmanagement und Innovation
+
+
+
+
+
+---
+class: left
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+## Ursachen geringer Reproduzierbarkeit
+
+- Fehlende Informationen
+- Fehlende Nachvollziehbarkeit
+- Copy-Paste-Fehler
+- Nicht-reproduzierbare Workflows mangels Syntax
+- Keine frei nutzbaren Messinstrumente
+- Software-Updates
+- Verwendete Software nicht mehr verfügbar
+- Verwendete Werkzeuge zu teuer
+- ...
+
+---
+class: left
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+## Nicht-reproduzierbare Workflows mangels Syntax
+
+<iframe width="1100" height="460" src="https://www.youtube.com/embed/s3JldKoA0zw?si=j9La5wFsBF_-S1_c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+???
+
+Anschauen bis 0:56min
+
+
+---
+class: left
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+## Nutzerfreundlichkeit vs. "Forscherfreundlichkeit"
+
+
+.left-column[
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '50%'
+knitr::include_graphics('https://xcelab.net/rm/wp-content/uploads/2012/01/9781482253443.jpg')
+```
+]
+
+
+.right-column[
+.blockquote[
+[The command line] also saves you time and fulfills ethical obligations. With command scripts, each analysis documents itself, so that years from now you can come back to your analysis ans replicate it exactly. You can re-use your old files and send them to colleagues. Pointing and clicking, however, leaves no trail of breadcrumps. [...] Once you get in the habit of planning, running and preserving your statistical analysis in this way, it pays for itself many times over. With point-and-click, you pay down the road, rather than only up front.
+.tr[
+[McElreath, R. (2016).](https://xcelab.net/rm/statistical-rethinking/)
+]]
+]
+
+
+
+
+---
+class: left 
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+## Wäre es nicht schön ... 
+
+
+
+.pull-left[
+&gt;   .xxlarge["Die mittlere Reaktionszeit betrug **\[.blue[hier automatisch das Ergebnis der Berechnung einfügen]\]** Sekunden."]
+]
+
+
+.pull-right[
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '70%'
+knitr::include_graphics('https://i.imgflip.com/39nb0w.jpg')
+```
+]
+
+
+
+
+---
+class: left
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+## Wäre es nicht schön ... (cont'd)
+
+
+
+.pull-left[
+
+Bla bla bla ...
+
+```r
+x1 = rechne(Input_Data)
+x2 = rechne_mehr(x1)
+x3 = irgendwas(x2)
+x4 = wildes_zeugs(x3)
+```
+
+Die mittlere Reaktionszeit betrug `x4` Sekunden.
+
+Bla bla bla ...
+]
+
+
+.pull-right[
+
+Bla bla bla ...
+
+Die mittlere Reaktionszeit betrug .red[.bold[`r runif(n=1,min=2,max=7)`]] Sekunden.
+
+Bla bla bla ...
+
+]
+
+
+
+---
+class: left
+
+.blockquote[Reproduzierbarkeit in Wissenschaft und Praxis]
+
+## Workflow für reproduzierbare *und* kollaborative Forschung
+
+<iframe width="1100" height="460" src="https://www.youtube.com/embed/s3JldKoA0zw?si=xwEH9lmaET-I4G40&amp;start=57" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+???
+
+Verweis auf Möglichkeit zur Integration in github
+
+
+
+---
+name: Airbnb
+class: left 
+
+.blockquote[Praxisbeispiel]
+
+## Reporting bei Airbnb
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+knitr::include_url('https://peerj.com/preprints/3182.pdf',height = '460px')
+```
+
+
+
+
+
+
+
+
+---
+class: inverse, center, middle
+
+
+# Kurze Einführung in RMarkdown und Quarto
+
+.blockquote[RMarkdown vs. Quarto]
+
+.blockquote[Grundstruktur Rmd/qmd]
+
+.blockquote[Programmcode]
+
+.blockquote[Text und Formatierung]
+
+.blockquote[Online-Ressourcen]
+
+
+---
+name: Workflow
+class: left 
+
+.blockquote[Einordnung]
+
+## Workflow von Datenprojekten
+
+```{r}
+#| echo: false
+#| fig-cap: 'Data Science Workflow. Eigene Darstellung.'
+knitr::include_graphics(xfun::from_root('img','PVA1','DataScience_Workflow.PNG'))
+```
+
+
+
+
+---
+class: left
+
+.blockquote[RMarkdown vs. Quarto]
+
+## Workflow, Gemeinsamkeiten und Unterschiede
+
+```{r}
+#| label: rmd-qmd
+#| echo: false
+knitr::include_url('https://statistik-dresden.de/archives/17921',height = '460px')
+```
+
+
+???
+
+* RMarkdown und das neuere Quarto bieten die Möglichkeit Analysen, Visualisierungen und Berichte flexibel in einem integrierten und reproduzierbaren Workflow zu erstellen.
+  * "Integriert" bedeutet, dass Textsatz, Programmcode für Analysen und die Ergebnisse in einem einzigen Dokument kombiniert werden können. Dies ermöglicht die Erstellung dynamischer Dokumente und stellt die Reproduzierbarkeit sicher.
+  * "Flexibel" besteht hinsichtlich der Eingabe und der Ausgabe
+    * Eingabe: Neben `r fa('r-project')`-Programmcode kann auch Python-Code oder tikz-Code (zur Erstellung von Vektorgrafiken) genutzt werden. Quarto ermöglicht zudem den Einsatz der aufsteigenden Programmiersprach Julia.
+    * Ausgabe: Es stehen verschiedene Ausgabeformate wie HTML, PDF, Word oder auch Powerpoint zur Verfügung. 
+  
+* Quarto kann als Weiterentwicklung von RMarkdown gesehen werden:
+  * Während bei RMarkdown klar die Nutzung von `r fa('r-project')` im Vordergrund steht, richtet sich Quarto an ein breiteres Publikum und versucht auch Nutzer von Python oder Julia anzusprechen. 
+  * Durch eine Benutzeroberfläche mit Schaltflächen ähnlich einem Textverarbeitungsprogramm (bspw. zur Textformatierung oder zum Einfügen von Tabellen oder Grafiken) ist es gerade für Einsteiger etwas **benutzerfreundlicher**.
+  * Außerdem bietet Quarto verbesserte Funktionen für die Veröffentlichung und Freigabe von Dokumenten.
+
+Die [Quarto Webseite](https://quarto.org/docs/get-started/hello/rstudio.html) bietet eine umfassende und übersichtliche Einführung in alle Funktionaliäten. Daher sollen im Folgenden nur  die wesentlichen Elemente kurz vorgestellt werden.
+
+
+
+---
+class: left
+
+.blockquote[Grundstruktur RMarkdown/Quarto]
+
+## Elemente von Rmd/qmd-Dateien
+
+1. Metainformation (YAML-Kopf)
+
+--
+
+2. Text und Formatierung (Markdown)
+
+--
+
+3. Programmcode (`r fa('r-project')`, Python etc.)
+
+---
+class: left
+name: yaml
+
+.blockquot[Grundstruktur RMarkdown/Quarto]
+
+## YAML-Kopf: Ein Beispiel
+
+```yaml
+---
+title: "Datenprojekte im R tidyverse"
+author: "Jörg Schoder"
+date: "2023-07-28"  # Alternativ: | "` r format(Sys.Date(), "%d %B, %Y")`"
+lang: de-DE
+bibliography: ../lit/my_bib.json
+reference-section-title: Quellenverzeichnis
+output:
+    html_document:
+      css: ../css/my_styles.css
+      number_section: true
+      toc: true
+      toc_depth: 3
+---
+```
+
+.small[
+`r fa('circle-exclamation')` Im Beispiel: Datum als fester Wert. Alternativ: Verwendung des aktuellen Datums aus dem System mit der Funktion `Sys.Date()` als  [Inline-Code](#code-chunks). 
+]
+
+
+
+
+
+???
+
+
+
+* YAML-Kopf
+  * Am Anfang des Dokuments befindet sich ein YAML-Block (steht für "YAML Ain't Markup Language"), der Metadaten über das Dokument enthält.
+  * Metadaten sind unter anderem:
+    * Autor des Dokuments
+    * Titel und ggf. Untertitel
+    * Datum und die 
+    * Ausgabeformate
+  * Der YAML-Kopf wird oben und unten durch drei Bindestriche begrenzt.
+
+* Among all options in html docs (+slidy + xaringan), the most challenging but perhaps also the most rewarding one is css, because it allows you to customize the appearance of your slides using any CSS rules or hacks you know.
+
+
+---
+class: left
+
+.blockquote[Grundstruktur RMarkdown/Quarto]
+
+## Exkurs: css (für html-Ausgabedateien)
+
+* CSS (Cascading Style Sheets): eine oder mehrere Datei(en) mit  Gestaltungsanweisungen
+
+* CSS wurde entworfen, um Darstellungsvorgaben weitgehend von den Inhalten zu trennen
+
+* css muss direkt im YAML-Kopf eingebunden werden (weitere Details [hier](https://bookdown.org/yihui/rmarkdown-cookbook/html-css.html))
+
+
+---
+class: left
+
+.blockquote[Grundstruktur RMarkdown/Quarto]
+
+## Vordefinierte "themes"
+
+
+```{r}
+#| echo: false
+knitr::include_url('https://rmarkdown.rstudio.com/gallery.html', height = '460px')
+```
+
+
+
+
+
+---
+class: left
+name: code-chunks
+
+.blockquote[Programmcode]
+
+## Codeblöcke vs. Inline-Code
+
+.panelset[
+.panel[.panel-name[Code-Blöcke...]
+* ...enthalten Code in R (oder anderen Programmiersprachen, u.a. Python, Julia).
+
+* ...werden in RStudio grau unterlegt angezeigt.
+````{verbatim}
+```{r}
+x <- 3
+x+2
+```
+````
+* Backticks und Klammern müssen nicht händisch eingegeben werden. Einfügen von Codeblöcken mit...
+.small[
+  * ...Tastenkombination `Ctrl + Alt + I` (macOS `Cmd + Option + I`) oder...
+]
+.small[
+  * ...in Quarto über das Dropdownmenu `Insert`
+]
+* Für die Auswertung der Code-Blöcke und die Darstellung im Ausgabedokument gibt es verschiedene [Optionen](#chunk-opts).
+]
+.panel[.panel-name[Inline-Code...]
+```{r}
+#| echo: false
+x <- 3
+```
+* ...ermöglicht die Einbindung von Daten bzw. Ergebnissen in den Fließtext eines Ausgabedokuments.
+
+* Beispiel: 
+
+Eingabe in RMarkdown/Quarto:
+
+````{verbatim}
+Die Summe aus dem Wert von Objekt x und 4 ist `r x+4`.
+````
+
+Im Ausgabedokument erscheint:
+
+Die Summe aus dem Wert von Objekt x und 4 ist `r x+4`.
+
+]
+]
+
+???
+
+* ...wird zwischen  einem eröffnenden Backtick (&#96;) gefolgt von r und einem schließenden Backtick eingegeben:
+
+
+
+
+---
+class: left
+name: chunk-opts
+
+.blockquote[Programmcode]
+
+## Nutzung von Code-Block-Optionen
+
+
+.panelset[
+.panel[.panel-name[Ausgewählte Optionen]
+* `label`: Zur Benennung des Codeblocks, zur Orientierung oder um ihn ggf. zu verknüpfen.
+* `echo`: soll der Code im finalen Dokument erscheinen (true), oder nicht (false)?
+* `include`: soll ein Codeblock im Ausgabedokument erscheinen (true), oder nicht (false)?
+* `message` bzw. `warning`: sollen Meldungen/Warnungen im finalen Dokument erscheinen. In der Regel ist dies nicht gewünscht (false).
+* `out.width` ermöglicht die Festlegung der Größe des Outputs und wird häufig eingesetzt, wenn Bilddateien eingefügt werden. Angaben können in `%` oder einer Maßeinheit, wie bspw. Pixel (`px`) erfolgen.
+* `fig.cap` ermöglicht die Eingabe von Titeln für Abbildungen oder Tabellen (engl. captions).
+]
+.panel[.panel-name[Eingabe]
+* Traditionell...
+  * ...erfolgte in RMarkdown die Eingabe der Codeblock-Optionen in den geschweiften Klammern, mit denen der Codeblock eröffnet wird. 
+  * Mehrere Optionen werden durch Komma getrennt.
+
+* Modernere (und intuitivere) Variante:
+  * Eingabe der Optionen zu Beginn eines Codeblocks nach der Zeichenfolge `#|`.
+  * Üblich ist, jede Option in einer separaten Zeile zu spezifizieren. 
+]
+]
+
+.small[
+`r fa('circle-exclamation')` Vollständige(re) Liste mit Code-Block-Optionen bspw. im [RMarkdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+]
+---
+class: left
+
+.blockquote[Übung]
+
+## Erste Präsentation mit Quarto
+
+1. Erstelle eine neue Quarto-Datei. Wähle die Option "Presentation" im "html"-Format.
+
+2. Identifiziere die 3 Grundelemente einer .qmd-Datei im geöffneten Fenster.
+
+3. Drücke den **Render**-Button und betrachte das Ergebnis.
+
+4. Modifiziere den bestehenden R-Code-Block so, dass nicht nur das Ergebnis sondern auch die Eingabe im Code-Block im Ausgabedokument erscheint.
+
+6. Füge einen weiteren R-Code-Block und erzeuge ein Objekt `x <- 3+4`. Füge unterhalb des Code-Blocks einen Satz hinzu und binde das Objekt sinnvoll in Form von **Inline-Code** ein. Drücke erneut auf **Render** und prüfe, ob das gewünschte Ergebnis erreicht wurde.
+
+7. Füge in den R-Code-Block unterhalb von `x` noch ein Objekt `y` als Vektor mit 6 Elementen ein. Formuliere unterhalb des Code-Blocks einen weiteren Satz, in den das 3. Element des Vektors `y` in Form von **Inline-Code** sinnvoll eingebunden wird.
+
+```{r}
+#| echo: false
+countdown::countdown(minutes = 5, seconds = 00, top = 0)
+```
+
+
+---
+class: inverse,center,middle
+
+# Wir brauchen eine Pause.
+
+---
+
+background-image: url("http://bit.ly/cs631-donkey")
+background-size: cover
+
+
+
+---
+class: left
+
+.blockquote[Programmcode]
+
+## Interaktive Plots und Animationen
+
+.panelset[
+.panel[.panel-name[Interaktive Grafiken]
+```{r}
+#| echo: false
+#| fig-align: 'center'
+knitr::include_url('https://r-graph-gallery.com/interactive-charts.html',height = '320px')
+```
+]
+
+.panel[.panel-name[Animationen]
+```{r}
+#| echo: false
+#| fig-align: 'center'
+knitr::include_url('https://r-graph-gallery.com/animation.html',height = '320px')
+
+```
+]
+]
+
+
+`r fa('circle-exclamation')` Die Abbildungen können in einem Code-Block direkt in einem Dokument erzeugt werden.
+
+
+---
+class: left
+
+.blockquote[Text und Formatierung]
+
+## Bausteine
+
+* Textabschnitten und Überschriften
+* Listen und Aufzählungen
+* Formatierung
+* Gleichungen
+* Quellenverweise
+* Tabellen
+* Einbindung von Grafik-Dateien und Hyperlinks
+* etc.
+
+
+
+---
+class: left
+
+.blockquote[Text und Formatierung]
+
+## Gleichungen
+
+.panelset[
+.panel[.panel-name[Layout]
+* **Inline-Gleichungen**: Platzierung der Gleichung zwischen zwei `$`-Symbolen.
+
+Beispiel: `$a + b = c$` wird zu $a + b = c$
+* **Freigestellte Gleichungen**: Platzierung der Gleichung zwischen **je zwei** `$`-Symbolen.
+
+Beispiel: 
+```html
+$$a + b = c$$
+``` 
+wird zu $$a + b = c$$
+]
+.panel[.panel-name[Latex-Syntax]
+* Brüche: `\frac{Zähler}{Nenner}`.
+
+* Potenzen: `x^2` für x hoch 2.
+
+* Indizes: `x_1` für x mit Index 1.
+
+* Wurzeln: `\sqrt{Inhalt}` für die Quadratwurzel oder `\sqrt[n]{Inhalt}` für die n-te Wurzel.
+
+* Griechische Buchstaben: `\alpha`, `\beta`, `\gamma`, usw.
+
+* ...
+]
+]
+
+
+
+
+
+
+
+
+
+---
+class: left
+
+.blockquote[Text und Formatierungen]
+
+## Grafiken und Hyperlinks
+
+### Einfache `r fa('markdown')`-Syntax:
+  
+  * Einbindung lokal gespeicherter Bilddateien (auch gifs) mit `![Bildbeschreibung](pfad/zum/bild.jpg)`.
+  * Dateien aus dem web durch Angabe der URL in der runden Klammer.
+  * Einbindung eines Hyperlinks mit `[Linkbeschreibung](https://www.beispiel.de)`.
+
+### RMarkdown-Syntax (für mehr Flexibilität mittels Code-Block-Optionen)
+
+  * Einbinden von Bildern mit `knitr::include_graphics()` in einem `r fa('r-project')`-Codeblock. Pfadangabe oder URL zur Bilddatei in Klammer.
+  * Einbinden von Hyperlinks (oder Bildern!) mit `knitr::include_url()` in einem `r fa('r-project')`-Codeblock.
+
+
+
+
+
+
+
+---
+class: left
+
+.blockquote[Text und Formatierungen]
+
+## Icons
+
+* Fontawesome-Icons können mit der **fontawesome**-Bibliothek eingebunden werden.
+
+* Beispiel: Das Symbol `r fontawesome::fa('circle-right')` kann mit 
+` r fontawesome::fa('circle-right')` (zwischen zwei backticks) in den Fließtext eingebunden werden.
+
+* [Online-Dokumention](https://rstudio.github.io/fontawesome/articles/icon-reference.html) zum **fontawesome**-Paket mit verfügbaren Icons und deren Labels.
+
+## Emojis
+
+* Emojis können mit Wickhams [**emo**-Paket](https://github.com/hadley/emo) eingebunden werden. 
+
+* Beispiele
+  - als Inline-Code mit ID  ` r emo::ji('smiley')` liefert `r emo::ji('smiley')`
+  - oder direkt: 🏋
+
+
+---
+class: left
+name: map
+
+.blockquote[HTML-Widgets]
+
+## Beispiel: Karten
+
+```{r}
+#| echo: true
+#| out-width: '70%'
+#| fig-align: 'center'
+library(leaflet)
+leaflet(height='365px') %>% addTiles() %>% setView(8.535, 47.380, zoom = 17)
+```
+
+
+---
+class: left
+
+.blockquote[Tabellen]
+
+## Händisch
+
+* RMarkdown
+
+* Quarto
+
+## Automatisiert
+
+* [**gt**-Paket](https://gt.rstudio.com/articles/intro-creating-gt-tables.html)
+* [**reactable**-Paket](https://glin.github.io/reactable/)
+* [**kableExtra**-Paket](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
+* [**huxtable**-Paket](https://hughjonesd.github.io/huxtable/huxtable.html)
+* ...
+
+
+---
+class: left
+
+.blockquote[Text und Formatierung]
+
+## Beispiel: Tabelle mit dem **kableExtra**-Paket
+
+.panelset[
+.panel[.panel-name[Code]
+```{r}
+#| echo: true
+#| eval: false
+library(gapminder)
+library(kableExtra)
+gapminder %>%
+  head() %>% 
+  kable(align = "lcccr",format = "html", table.attr = "style='width:50%;'") %>%      #Festlegung der Tabellenbreite
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) #gestreift mit mouse-over-Effekt
+```
+]
+.panel[.panel-name[Ergebnis]
+```{r}
+#| echo: false
+#| warning: false
+library(gapminder)
+library(kableExtra)
+gapminder %>%
+  head() %>% 
+  kable(align = "lcccr",format = "html", table.attr = "style='width:50%;'") %>%      #Festlegung der Tabellenbreite
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) #gestreift mit mouse-over-Effekt
+```
+]
+]
+
+
+---
+class: left
+
+.blockquote[Text und Formatierung]
+
+## Tabellen mit den Paketen **gt** und **gtextra**
+
+```{r}
+#| echo: false
+#| out-width: '90%'
+knitr::include_graphics(xfun::from_root('img','PVA2','FelixAnalytix.PNG'))
+```
+
+.quelle[Anleitung auf [medium.com.](https://felixanalytix.medium.com/how-to-make-beautiful-tables-using-r-programming-35d75cc919fb)]
+
+
+
+---
+class: left
+
+.blockquote[Text und Formatierung]
+
+## Quellenangaben und Einbindung von Bibliographien
+
+* Quellenverweise können in Quarto und RMarkdown einfach durch ein `@`-Symbol vor dem **Zitationsschlüssel** eingefügt werden
+  * Empfehlung: Literaturverwaltung mit Zotero. 
+  * Beispiel: Verweis auf das Diskussionspapiers von Schoder (2014) mit dem Zitationsschlüssel (engl. citation key) `schoder_2014` durch Eingabe `@schoder_2014` 
+* Literaturverzeichnis wird automatisch erzeugt, wenn 
+  * YAML-Kopf die Angaben zur Bibliographie enthält und...
+  * ...die .qmd-/.Rmd-Datei gerendert wird
+
+???
+
+Natürlich geht noch mehr, sehr viel mehr!
+
+---
+class: left
+
+.blockquote[Online-Ressourcen]
+
+## Hilfreiche Quellen zum Nachschlagen
+
+
+- Umfassend: [RMarkdown - The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+- Kompakt: [Cheatsheet "Rmarkdown
+2.0"](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
+
+
+- Tutorials vom RStudio-Team, z.B. [hier](https://rmarkdown.rstudio.com/lesson-1.html).
+
+- Nicht nur für Buchautoren: [Bookdown](https://bookdown.org/yihui/bookdown/)
+
+
+
+
+
+
+
+
+
+---
+class: left
+
+.blockquote[Übung]
+
+## Erstellung einer Präsentation mit Quarto
+
+1. Installiere das Paket **gapminder** (in der R Console):
+`install.packages('gapminder')`
+
+2. Erstelle eine neue Quarto-Datei zur Ausarbeitung einer kurzen Präsentation. 
+
+3. Nutze die R-Console um einen Überblick über die gapminder-Daten zu erhalten.
+
+4. Entscheide, welche Variable(n) als ggplot-visualisiert werden soll(en).
+
+5. Füge einen Code-Block in die .qmd/.Rmd-Datei ein und erzeuge einen ggplot.
+
+6. Berechne eine Statistik zu den visualisierten Daten (bspw. Mittelwert, Standardabweichung) und fomuliere auf einer neuen Folie einen kurzen Text, in welchen die Statistik als Inline-Code eingebunden wird.
+
+```{r}
+#| echo: false
+countdown::countdown(minutes = 15, seconds = 00, top = 0)
+```
+
+
+
+---
+class: inverse, center, middle
+
+# Kollaborative Forschung mit Git
+
+
+.blockquote[Versionskontrolle]
+
+.blockquote[Installation]
+
+
+
+---
+class: left
+
+.blockquote[Versionskontrolle]
+
+## "Projektmanagement"
+
+* Plan und Struktur erhöhen Erfolgsaussichten von Projekten.
+
+* Projekte können mit Ordnern und Dateien strukturiert werden.
+
+* Wünschenswert (für Teamprojekte aber auch Einzelkämpfer):
+  * Rückverfolgung von Änderungen 
+  * Möglichkeit zur Wiederherstellung älterer Versionen
+  
+* Git als beliebtes (verteiltes) Versionskontrollsystem bei Software-Entwicklern
+  
+* Ein Git-*Repo(sitory)* umfasst alle Ordner und Daten eines Projekts
+
+* Github `r fa('github')` als bekannter kostenloser web-basierter Hosting-Service
+
+---
+class: left
+
+.blockquote[Versionskontrolle]
+
+## Elemente von Git-Projekten
+
+- *Repository*: Der Container, der alle Dateien und alle Änderungen eines Projekt enthält.
+
+- *Working Tree*: Dateisystem der Repos in aktueller (oder frühere) Version
+
+- *Staging Area* (*Index*): Dokumentiert Dateien mit Änderungen, die noch nicht eingestellt sind.
+
+- *Head*: Aktuellste Version des Projekts (neuester Commit) im aktuellen Branch
+
+- *Branch*: Variante des Projekts
+
+
+
+---
+class: left
+
+.blockquote[Versionskontrolle]
+
+## Git-Workflow und Begrifflichkeiten
+
+.panelset[
+.panel[.panel-name[Workflow]
+```{r}
+#| echo: false
+#| out-width: '70%'
+#| fig-align: 'center'
+knitr::include_graphics('https://backlog.com/app/themes/backlog-child/assets/img/guides/git/basics/git_workflow_002.png')
+```
+.quellePanURL[Quelle: [backlog.com.](https://backlog.com/app/themes/backlog-child/assets/img/guides/git/basics/git_workflow_002.png)]
+]
+.panel[.panel-name[Begriffe]
+* Git starten (Odner für Git initialsieren)
+
+* Änderungen vornehmen (ggf. an mehreren Dateien)
+
+* Dateien auswählen, deren Änderungen dokumentiert werden sollen ("*adden*" oder "*stagen*")
+
+* Änderungen einstellen ("*committen*")
+
+* Änderungen zum Server replizieren ("*pushen*")
+Ggf. Änderungen prüfen und kommentieren
+
+]
+]
+
+
+`r fa('circle-exclamation')` Nach erfolgreicher Installation kann der gesamte Workflow aus RStudio gesteuert werden.
+
+
+---
+class: left
+name: installgit
+
+.blockquote[Installation]
+
+## Git Installation
+
+* Ausführliche Anleitung: [happygitwithr.com](https://happygitwithr.com/install-intro)
+
+* Kompakt, die notwendigen Schritte:
+
+  1. Account (kostenlos) bei [Github](https://github.com) anlegen
+
+  2. RStudio aktualisieren
+
+  3. Git herunterladen/installieren [Hinweise](https://happygitwithr.com/install-git.html)
+
+  4. Bei Git [anmelden](https://happygitwithr.com/hello-git.html)
+
+  5. Git-Editor (z.B. [Github Desktop](https://desktop.github.com/)) installieren
+
+
+
+
+
+
+
+
+
+
+---
+class: left
+
+.blockquote[Outro]
+
+## Auch R und RMarkdown/Quarto haben ihre Tücken 
+
+.right-column[
+```{r}
+#| echo: false
+#| out-width: '40%'
+#| fig-align: 'center'
+knitr::include_graphics('https://i.makeagif.com/media/10-08-2015/koAH4x.gif')
+```
+]
+.left-column[
+Wo gibt es Hilfe? 
+
+* [StackOverflow](https://stackoverflow.com/)
+
+* [RStudio/Posit Community](https://community.rstudio.com/)
+
+* [ChatGPT](https://chat.openai.com/)
+
+* ...
+]
+
+
+---
+name: EndHanks
+class: center
+
+background-size: 75%
+background-image: url(https://media.giphy.com/media/KJ1f5iTl4Oo7u/giphy.gif)
