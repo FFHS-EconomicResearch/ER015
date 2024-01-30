@@ -530,6 +530,24 @@ class: left
 6. Container "Tabelle" befüllen (Interaktive Tabellen mit **DT**-Bibliothek)
 
 
+
+---
+class: inverse, center, middle
+
+## Ausblick: Shiny Apps
+
+---
+class: left
+
+.blockquote[Ausblick Shiny Apps]
+
+```{r}
+#| echo: false
+knitr::include_url('https://shiny.posit.co/r/getstarted/shiny-basics/lesson5/',height='470px')
+```
+
+
+
 ---
 name: EndHanks
 class: center
