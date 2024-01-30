@@ -1,0 +1,83 @@
+---
+title: "Airbnb Zürich"
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(data.table)
+library(geojsonsf)
+library(leaflet)
+library(tidyverse)
+library(fontawesome)
+library(DT)
+```
+```{r}
+#| label: get-data
+#http://insideairbnb.com/get-the-data/
+ZH_listings <- fread('http://data.insideairbnb.com/switzerland/z%C3%BCrich/zurich/2023-09-24/data/listings.csv.gz')
+
+ZH_locations <- geojsonsf::geojson_sf("http://data.insideairbnb.com/switzerland/z%C3%BCrich/zurich/2023-09-24/visualisations/neighbourhoods.geojson")
+
+```
+
+
+
+### Die Airbnbs in Zürich...
+
+```{r}
+ZH_listings %>% 
+  select(latitude,longitude) %>% 
+  leaflet(width = "100%",height = "100%") %>% 
+  addTiles() %>% 
+  addMarkers()
+```
+
+
+
+### ...konzentrieren sich in 3 Bezirken
+
+```{r}
+#| label: plot-offers
+tbl_plot <- ZH_listings %>% 
+                mutate(kreis=factor(neighbourhood_group_cleansed,
+                      levels=c("Kreis 1","Kreis 2","Kreis 3","Kreis 4","Kreis 5",
+                               "Kreis 6","Kreis 7","Kreis 8","Kreis 9","Kreis 10",
+                               "Kreis 11","Kreis 12")
+                      ),
+                      preis=readr::parse_number(price)
+                      )
+p <- tbl_plot %>% 
+      ggplot(aes(x=kreis)) + 
+      geom_bar() + 
+      labs(x=element_blank(),y="Anzahl der Angebote")
+
+plotly::ggplotly(p)
+
+```
+
+***
+
+* Mehr als 1/3 der Zürcher Airbnb's befinden sich in den Kreisen 3, 4 und 11.
+
+
+### Preise
+
+```{r}
+#| label: plot-prices
+
+p <- tbl_plot %>% 
+      filter(preis<2500) %>% 
+      ggplot(aes(x=kreis,y=preis)) + geom_violin() +
+      labs(x=element_blank(),y="Preis pro Nacht (in US$)")  
+plotly::ggplotly(p)
+```
+
+
+
+
+

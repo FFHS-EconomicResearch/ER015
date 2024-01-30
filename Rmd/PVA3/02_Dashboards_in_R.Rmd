@@ -1,0 +1,553 @@
+---
+title: "Storytelling with Data"
+subtitle: "Reporting & Automation"
+author: "Prof. Dr. Jörg Schoder"
+institute: "FFHS" 
+date: "`r Sys.Date()`"
+bibliography: ../../lit/my_bib.bib
+reference-section-title: Quellenverzeichnis
+output:
+  xaringan::moon_reader:
+    self_contained: true
+    css: 
+         - default
+         - ../../css/ffhs-theme_js.css
+         - xaringan-themer.css
+    includes:
+      after_body: ../../css/insert-logo.html
+    lib_dir: ../../libs
+    nature:
+      slideNumberFormat: "%current%/%total%"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+    
+
+    
+---
+class: title-slide
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+style_xaringan(text_color = "#d50006",inverse_text_color = "#FFFFFF",inverse_background_color = "#d50006", title_slide_background_color = "#d50006",header_background_color = "#d50006",header_color = "#FFFFFF",header_h1_font_size = "32px",
+  header_h2_font_size = "26px",link_color="#502479",
+  header_h3_font_size = "20px",text_slide_number_color = "#d50006",text_slide_number_font_size = "0.5em")
+```
+
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_progress_bar(color = "#d50006", location = "bottom")
+xaringanExtra::use_xaringan_extra(c("tile_view","scribble","panelset","tachyons"))
+xaringanExtra::style_panelset_tabs(font_family = "inherit")
+#xaringanExtra::use_search(show_icon = TRUE)
+#weitere: "share_again","animate_css", "webcam","freezeframe","clipboard","fit_screen","extra-styles" 
+xaringanExtra::use_editable(expires = 1)
+xaringanExtra::use_freezeframe(trigger = "hover")
+``` 
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(latex2exp)
+library(fontawesome)
+library(emo)
+source(xfun::from_root("lit","helper.R"))
+library(RefManageR)
+BibOptions(check.entries = FALSE, 
+           bib.style = "authoryear", 
+           style = "markdown",
+           dashed = TRUE)
+file.name <- system.file("Bib", 
+                         "my_bib.bib", 
+                         package = "RefManageR")
+bib <- ReadBib(xfun::from_root("lit","my_bib.bib"))
+```
+
+# ER015 - Storytelling with Data
+
+## PVA3
+
+### Datenprodukte - Dashboards.
+
+ 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+### HS 2023 
+<br>
+### Prof. Dr. Jörg Schoder
+.mycontacts[
+`r fa('github')` @FFHS-EconomicResearch
+`r fa('linkedin')` @jfschoder
+]
+
+
+---
+layout: true
+
+<div class="my-footer"></div>       
+
+<div style="position: absolute;left:400px;bottom:10px;font-size:9px">`r r2symbols::sym('copyright')``r rmarkdown::metadata$author`</div>
+
+
+---
+name: agenda
+class: left
+
+.blockquote[Agenda]
+
+## Interaktive Datenprodukte: Dashboards
+
+* Einführung
+
+* Gestaltung von Dashboards
+
+* Dashboards ind R: flexdashboard und Quarto
+
+* **Übung** *flexdashboard*
+
+
+
+---
+name: motivation
+class: left
+
+.blockquote[Einführung]
+
+## Was sind Dashboards?
+
+.blockquote[
+[..] are popular methods for displaying multiple visualisations and statistical
+information. [..] often take the form of some organisational instrument that offers
+both at-a-glance and detailed views of many different analytical and information dimensions.
+[..] are not a unique chart type themselves, but rather should be considered
+compositions that comprise multiple chart types.
+.tr[
+`r Citet(bib, "kirk_data_2019-1")`
+]
+]  
+
+* Sammlung von Containern als zusammenhängende visuelle Oberfläche.
+
+* Inhalte der Container:
+  * Diagramme und Karten
+  * Tabellen und Einzelwerte
+  * Text und benutzerdefinierte Widgets
+
+* Ziel: Übersichtliche Zusammenstellung von Informationen für die Nutzer, die zum Denken anregt und Entscheidungen unterstützt.
+
+???
+
+Dashboards sind also eine Form eines Datenprodukts (für Endnutzer)
+
+
+
+---
+class: left
+
+.blockquote[Einführung]
+
+## Interaktive und Reaktive Dashboards
+
+.panelset[
+.panel[.panel-name[Vorteile]
+
+* Nutzer können... 
+  * ...Daten im "eigenen Tempo" und Detaillierungsgrad untersuchen
+  * ...verschiedene Szenarien vergleichen
+
+* Erleichterung von Verständnis und Handlungsempfehlungen durch...
+  * ...klare, prägnante und visuelle Präsentation der Daten und 
+  * ...Hervorhebung wichtiger Erkenntnisse
+  
+* Steigerung des Interesses durch dynamisches und interaktives Erlebnis
+
+]
+.panel[.panel-name[Nachteile]
+ 
+
+* Aufwand zur Erstellung interaktiver Dashboards: komplexe Datenverarbeitungs-, Visualisierungs- und Interaktivitätsfunktionen
+* Aufwand zur Pflege: Notwendigkeit regelmäßiger Tests und Aktualisierungen
+
+* Voraussetzung von Kompetenzen beim Nutzer (Bedienung, Orientierung, Interpretation). 
+  * Gefahr der Überforderung und Verwirrung der Nutzer bei Komplexen Dashboards.
+  * Hauptbotschaft oder das Ziel des Dashboards?
+  
+* Risiko der Beeinträchtigung von die Datenqualität oder -sicherheit durch...
+  * ...Offenlegung sensibler oder ungenauer Daten oder unbefugte oder
+  * ...unbeabsichtigte Änderungen an den Daten durch Nutzer (Rechte!?)
+
+]
+]
+
+
+
+???
+
+Quelle: [Linkedin](https://www.linkedin.com/advice/3/what-advantages-disadvantages-using-interactive-1e)
+
+
+
+
+
+---
+class: inverse, center, middle
+
+## Gestaltung von Dashboards
+
+.blockquote[Grundregeln für effektive Dashboards]
+
+.blockquote[Beispiele und "Vorlagen"]
+
+
+---
+class: left
+.blockquote[Gestaltung von Dashboards]
+
+## Effektive interaktive Dashboards
+
+* Klare Definition von Zweck und Zielgruppe
+
+* Anpassung an Bedürfnisse, Erwartungen und Vorlieben der Zielgruppe
+
+* Vereinfachung durch Fokussierung auf relevanteste Metriken, Indikatoren und Visualisierungen
+
+* Klare Struktur ("Leserführung") und Bereitstellung von Kontext bzw. Interpretationshilfe (inkl. Handlungsempfehlungen) für die Nutzer 
+
+* Validierung und Schutz der verwendeten Daten (Sicherstellen von Genauigkeit, Zuverlässigkeit und Sicherheit)
+
+???
+
+Quelle: [Linkedin](https://www.linkedin.com/advice/3/what-advantages-disadvantages-using-interactive-1e)
+
+Um das Beste aus interaktiven Dashboards herauszuholen, ist es wichtig, sie effektiv zu entwerfen und zu nutzen. Definieren Sie den Zweck und die Zielgruppe des Dashboards und passen Sie es an ihre Bedürfnisse, Erwartungen und Vorlieben an. Vereinfachen und optimieren Sie das Dashboard, indem Sie sich auf die wichtigsten und relevantesten Metriken, Indikatoren und Visualisierungen konzentrieren, die seinen Zweck und seine Botschaft unterstützen. Stellen Sie außerdem Anleitungen und Kontext für den Benutzer bereit, indem Sie erklären, wie das Dashboard verwendet wird, was die Daten zeigen und welche Entscheidungen daraus abgeleitet werden können. Validieren und schützen Sie die Daten, um Genauigkeit, Zuverlässigkeit und Sicherheit zu gewährleisten. Auf diese Weise werden alle Änderungen oder Aktualisierungen der Daten im Dashboard widergespiegelt.
+
+
+
+
+
+
+
+---
+class: left
+
+.blockquote[Gestaltung von Dashboards]
+
+## Vorlagen und kritische Aspekte
+
+
+.pull-left[
+
+```{r}
+#| echo: false
+#| out-width: '100%'
+knitr::include_graphics(xfun::from_root('img','PVA3','bigbook_dashboards.png'))
+```
+
+]
+.pull-right[
+Inhalte:
+* Datenvisualisierung
+* Szenarien (Vorlagen), wie bspw.
+  * Executive Sales Dashboard
+  * Are We on Pace to Reach our Goals?
+  * Web Analytics
+  * Complaints Dashboard
+  * ...
+* Personalisierung von Dashboards für mehr Engagement
+* "Beware the Dead-End Dashboard"
+  
+]
+
+
+???
+
+* Engage People by making Dashboards Personal
+  * ZB Drop-Down-Menu mit Filter nach Geschlecht oder Region (Interesse der betrachtenden Person bzw. des Nutzers?)
+  * Farben im Corporate Design etc.
+* Beware Dead-End Dashboard
+  * Congratulations! Building an effective dashboard is a difficult thing to do, and you’ve done it.
+  * But **if you think your work is done, think again**; you’re just getting started.
+  * **Dashboard projects do not have endings**. Your business evolves over time, and your dashboards should do the same. **If not, they run the risk of becoming dead-end dashboards.**
+  * bspw. Anpassung an neue Fragen, die sich durch Nutzung des Dashboards ergeben haben.
+  * Erforderlich: Feedback der Nutzer
+
+
+---
+class: left
+
+.blockquote[Gestaltung von Dashboards]
+
+## Beispiel: Executive Sales Dashboard
+
+```{r}
+#| echo: false
+#| out-width: '80%'
+knitr::include_graphics(xfun::from_root('img','PVA3','executive_sales_dashboard_(Wexler_etal_2017).png'))
+```
+
+.quelle[Quelle: `r Citet(bib,"wexler_big_2017-1")`, S. 71.]
+
+
+???
+
+* Scenario
+  * Big Picture: You are a sales manager and want to know **how you and the sales team have been performing this quarter**. You want to be able to see, at any time during the quarter, exactly how total sales for that quarter compare to any previous quarter. You need to be able to see the overview for the whole business and also filter down to individual product lines or regions.
+  * Specifics:
+    * How are we doing this quarter?
+    * How is this quarter compared to last quarter and the same quarter last year?
+    * Are we on track to beat the previous quarter? Are we on track to beat the same quarter last year?
+    * What are the most recent transactions?
+  * Related Scenarios:
+    * Product managers would want to compare cumulative sales of different products launched at different times. Even though you launched Product X last year, did it sell quicker than Product Y, which you released this year?
+    * Social managers might want to measure how viral their campaigns were. Which campaigns got the most hits the most quickly? Which ones had the most longevity?
+    * Event organizers tracking registrations to recurring events would use a dashboard like this to see if their ticket sales are above or below target compared to previous events.
+  * How People Use the Dashboard: This dashboard is designed to provide a complete overview of sales for two products. The company executives receive a copy of this email weekly. If they need more details, they can click on a link to go to the live, interactive version viewable in their browser.
+
+
+* Why this Works
+  * focus on year-over-year and Quarter-over-Quarter growth Comparisons
+  * Key Metrics as text
+  * Small Details Where Needed
+  * Color
+  * Author Commentary
+
+
+
+---
+class: inverse, center, middle
+
+## Dashboards in R/Quarto
+
+.blockquote[flexdashboards: Struktur und Layout]
+
+.blockquote[Dashboards in Quarto]
+
+.blockquote[Übung]
+
+
+
+---
+class: left
+
+.blockquote[Dashboards in R/Quarto]
+
+## Die flexdashboard-Bibliothek
+
+```{r}
+#| echo: false
+knitr::include_url('https://rstudio.github.io/flexdashboard/articles/examples.html',height='470px')
+```
+
+???
+
+* Statische vs. dynamische
+
+* dynamisch durch Integration shiny-Syntax (siehe Teil 3)
+
+---
+class: left
+
+.blockquote[flexdashboard]
+
+## Struktur und Elemente von flexdashboards
+
+.panelset[
+.panel[.panel-name[YAML-Kopf]
+
+```yaml
+---
+title: "Mein erstes Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+```
+
+]
+.panel[.panel-name[Zeilen und Spalten]
+
+```{r}
+#| echo: false
+#| out-width: '100%'
+#| fig-align: 'center'
+knitr::include_graphics(xfun::from_root('img','PVA3','flexdb_layout.png'))
+```
+]
+]
+
+
+???
+
+* Obs! Layout: `orientation:`
+  * colums 
+  * rows
+
+* Ausprobieren!
+
+* Obs! Spaltenbreite kann mit `{data-width=x}` angepasst werden. Spalten müssen sich am Ende zu 1000 aufaddieren.
+
+* Inhalte für die Container:
+
+  * Interaktive JavaScript Datenvisualisierungen auf Basis von htmlwidgets.
+  * R Grafik-Outputs
+  * Tabellen (ggf. mit Filter-/Sortierfunktion)
+  * Werteboxen zur Hervorhebung zentraler Statistiken (bspw. KPIs)
+  * Visualisierung von Werten (bspw. Anteile, Grad der Zielerreichung)
+  * Text zur (kurzen) Erläuterung/Betonung
+
+* htmlwidgets:
+  * R packages that connect to Javascript libraries.
+  * Web-friendly visualizations of all sorts.
+  * Well suited to be part of a dashboard.
+
+---
+class: left
+
+.blockquote[Dashboards in R/Quarto]
+
+## Layout-Optionen in flexdashboards
+
+
+```{r}
+#| echo: false
+knitr::include_url('https://rstudio.github.io/flexdashboard/articles/layouts.html',height='470px')
+```
+
+
+---
+class: left
+
+.blockquote[Dashboards in R/Quarto]
+
+## Storyboards
+
+
+.panelset[
+.panel[.panel-name[Eingabe und Ergebnis]
+```{r}
+#| echo: false
+knitr::include_graphics(xfun::from_root('img','PVA3','storyboard.png'))
+```
+
+]
+.panel[.panel-name[Beispiel]
+```{r}
+#| echo: false
+knitr::include_url('https://testing-apps.shinyapps.io/flexdashboard-storyboard/',height='440px')
+```
+
+]
+]
+
+
+
+???
+
+Storyboard
+
+* Statt Containern bzw. mehreren Diagrammen auf einer Seite zeigt ein Storyboard...
+* ...**ein Diagramm nach dem anderen**...
+* ...**in einer bestimmten Reihenfolge**, die es dem Benutzer erlaubt,...
+* ...**eine Story**  nachzuvollziehen.
+* Die Story wird in Form kurzer Beschreibungen (Text) für jedes Diagramm angezeigt
+* Dabei ist auch eine Navigation mit Pfeilen (von links nach rechts) möglich
+* Neben den Diagrammen können noch weitere Textfelder mit Erläuterungen eingebunden werden.
+  * Damit sind auch Präsentation mit Action Titles und
+  * kurzen Erläuterungen möglich
+
+* Eingabe ganz einfach durch Ergänzung im YAML-Kopf
+  * storyboard: true
+
+* Beispiel
+
+
+---
+class: left
+
+.blockquote[Dashboards in R/Quarto]
+
+## Quarto Dashboards
+
+* verfügbar ab Quarto 1.4 (Stand Januar 2023 noch nicht in RStudio implementiert)
+
+```{r}
+#| echo: false
+knitr::include_url('https://quarto.org/docs/dashboards/',height='430px')
+```
+
+
+
+
+---
+class: inverse, center, middle
+
+## Übung flexdashboard
+
+.blockquote[Airbnb-Daten Zürich]
+
+.blockquote[Karten mit leaflet]
+
+.blockquote[Diagramme und Tabellen]
+
+
+---
+class: left
+
+.blockquote[Übung flexdashboard]
+
+## Ziel
+
+```{r}
+#| echo: false
+knitr::include_graphics(xfun::from_root('img','PVA3','airbnb_ZH.png'))
+```
+
+
+
+---
+class: left
+
+.blockquote[Übung flexdashboard]
+
+## Step-by-step zum Ziel
+
+1. Datenimport von [insideairbnb.com](http://insideairbnb.com/get-the-data/)
+
+2. Container der "Titelseite" anlegen
+
+3. Container befüllen (Karte, Balkendiagramm, Violin-Plot)
+
+4. Reiter "Details" anlegen (Angebote, Tabelle)
+
+5. Container "Angebote" befüllen (Karte, Kennzahlen, Anzeige)
+   
+6. Container "Tabelle" befüllen (Interaktive Tabellen mit **DT**-Bibliothek)
+
+
+---
+name: EndHanks
+class: center
+
+background-size: 75%
+background-image: url(https://media.giphy.com/media/KJ1f5iTl4Oo7u/giphy.gif)
+
+
+
+
+
+---
+class: left
+
+## Quellenverzeichnis
+
+.ref-slide[
+```{r, results='asis', echo=FALSE, warning=FALSE}
+PrintBibliography(bib)
+```
+]

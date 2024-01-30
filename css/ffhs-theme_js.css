@@ -111,6 +111,12 @@ hr, .mline h1::after {
   border-top: 0px solid #ffffff;
 }
 
+/* Layout Quellen-Folie  */
+.ref-slide {
+  font-size: 12px;
+}
+
+
 /* Farben*/
 
 .red {

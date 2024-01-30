@@ -1,0 +1,39 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    storyboard: true
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+
+### Einleitung
+
+```{r}
+
+```
+
+
+### Aspekt 1
+
+```{r}
+
+```
+
+### Aspekt 2
+
+```{r}
+
+```
+
+### Konklusion
+
+```{r}
+
+```
+
