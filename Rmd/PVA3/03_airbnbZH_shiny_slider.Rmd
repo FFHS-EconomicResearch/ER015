@@ -1,0 +1,174 @@
+---
+title: "Airbnb Zürich"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+runtime: shiny 
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(data.table)
+library(geojsonsf)
+library(leaflet)
+library(tidyverse)
+library(fontawesome)
+library(DT)
+```
+```{r}
+#| label: get-data
+#http://insideairbnb.com/get-the-data/
+ZH_listings <- fread('http://data.insideairbnb.com/switzerland/z%C3%BCrich/zurich/2023-09-24/data/listings.csv.gz')
+
+ZH_locations <- geojsonsf::geojson_sf("http://data.insideairbnb.com/switzerland/z%C3%BCrich/zurich/2023-09-24/visualisations/neighbourhoods.geojson")
+
+```
+
+
+
+Überblick 
+=====================================
+
+Column {data-width=600}
+-----------------------------------------------------------------------
+
+### Bezirke
+```{r}
+#| label: create-map
+ZH_locations$geometry %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addPolygons(label = paste0("Kreis ", 
+                            tidyr::extract_numeric(ZH_locations$neighbourhood_group),
+                            ", ", ZH_locations$neighbourhood
+                            )
+              )
+```
+
+
+
+Column {data-width=400}
+-----------------------------------------------------------------------
+
+### Angebote nach Bezirk
+
+```{r}
+#| label: plot-offers
+tbl_plot <- ZH_listings %>% 
+                mutate(kreis=factor(neighbourhood_group_cleansed,
+                      levels=c("Kreis 1","Kreis 2","Kreis 3","Kreis 4","Kreis 5",
+                               "Kreis 6","Kreis 7","Kreis 8","Kreis 9","Kreis 10",
+                               "Kreis 11","Kreis 12")
+                      ),
+                      preis=readr::parse_number(price)
+                      )
+p <- tbl_plot %>% 
+      ggplot(aes(x=kreis)) + 
+      geom_bar() + 
+      labs(x=element_blank(),y="Anzahl der Angebote")
+
+plotly::ggplotly(p)
+
+```
+
+> Datenquelle: insideairbnb.com
+
+### Preise
+
+```{r}
+#| label: plot-prices
+
+p <- tbl_plot %>% 
+      filter(preis<2500) %>% 
+      ggplot(aes(x=kreis,y=preis)) + geom_violin() +
+      labs(x=element_blank(),y="Preis pro Nacht (in US$)")  
+plotly::ggplotly(p)
+```
+
+
+
+Angebote {data-navmenu=Details}
+=====================================
+
+Column {data-width=800}
+-----------------------------------------------------------------------
+
+```{r}
+ZH_listings %>% 
+  select(latitude,longitude) %>% 
+  leaflet(width = "100%",height = "100%") %>% 
+  addTiles() %>% 
+  addMarkers()
+```
+
+Column {data-width=200}
+-----------------------------------------------------------------------
+
+### Anzahl Angebote
+
+```{r}
+num_offers <- nrow(tbl_plot)
+valueBox(num_offers)
+```
+
+### Anzahl Superhosts
+
+```{r}
+num_superhost <- ZH_listings %>% 
+                      mutate(superhost=if_else(host_is_superhost=="t",1,0)) %>% 
+                      summarise(count=sum(superhost)) %>% 
+                      pull()
+pct_superhost <- num_superhost/num_offers
+valueBox(num_superhost,
+         caption = "Superhosts",
+         icon= 'fa-star')
+```
+### Ganze Unterkunft
+
+```{r}
+num_entire <- ZH_listings %>% 
+                      mutate(entire=if_else(room_type=="Entire home/apt",1,0)) %>% 
+                      summarise(count=sum(entire)) %>% 
+                      pull()
+pct_entire <- num_entire/num_offers*100
+
+valueBox(num_entire,
+         caption = "Ganze Unterkünfte",
+         icon= 'fa-home',
+         href = '#anteil-ganze-unterkunft')
+
+
+```
+### Anteil Ganze Unterkunft
+
+```{r}
+gauge(value = pct_entire,
+      min = 0,
+      max = 100,
+      sectors = gaugeSectors(success = c(75, 100),
+                             warning = c(26, 74),
+                             danger = c(0, 25))
+      )
+```
+
+
+
+
+
+Tabelle {data-navmenu=Details}
+=====================================
+
+
+```{r}
+tbl_plot %>% 
+  select(host_name,kreis,preis) %>% 
+  rename(Gastgeber=host_name,Kreis=kreis, Preis=preis) %>% 
+  DT::datatable(
+                rownames = FALSE,
+                extensions = 'Buttons', options = list(
+                               dom = 'Bfrtip',
+                              buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
+  ))
+```
+

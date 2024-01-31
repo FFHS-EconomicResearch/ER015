@@ -286,7 +286,8 @@ class: left
 
 ```{r}
 #| echo: false
-#| out-width: '80%'
+#| out-width: '90%'
+#| fig-align: 'center'
 knitr::include_graphics(xfun::from_root('img','PVA3','executive_sales_dashboard_(Wexler_etal_2017).png'))
 ```
 
@@ -474,7 +475,7 @@ class: left
 
 ## Quarto Dashboards
 
-* verfügbar ab Quarto 1.4 (Stand Januar 2023 noch nicht in RStudio implementiert)
+* ab Quarto 1.4 (Stand Januar 2023 noch nicht in RStudio implementiert)
 
 ```{r}
 #| echo: false
@@ -508,7 +509,7 @@ class: left
 knitr::include_graphics(xfun::from_root('img','PVA3','airbnb_ZH.png'))
 ```
 
-
+.quelle[Eigene Darstellung.]
 
 ---
 class: left
@@ -543,9 +544,66 @@ class: left
 
 ```{r}
 #| echo: false
-knitr::include_url('https://shiny.posit.co/r/getstarted/shiny-basics/lesson5/',height='470px')
+knitr::include_url('https://shiny.posit.co/r/getstarted/shiny-basics/lesson5/',height='500px')
 ```
 
+
+
+
+---
+class: left
+
+.blockquote[Ausblick Shiny Apps]
+
+## Shiny Apps in der flexdashboard-Bibliothek
+
+```yaml
+---
+title: "Airbnb Zürich"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+runtime: shiny 
+---
+```
+
+`r fa('circle-plus')` Ermöglicht Einbindung von Nutzer-Eingaben, bspw. über "Schieberegler" etc. für interaktive(re) Gestaltung
+
+`r fa('circle-minus')` Syntax wird etwas "komplizierter" (vgl. Foliensatz zu Shiny Apps)
+
+
+
+---
+class: inverse, center, middle
+
+## Zusammenfassung
+
+
+---
+class: left
+
+.blockquote[Zusammenfassung]
+
+## Dashboards...
+
+.small[
+* ...als gängige Form von Datenprodukten zur zusammenfassenden Darstellung (entscheidungs-)relevanter Daten.
+
+* ...können mit Diagrammen, Karten, Kennzahlen, Tabellen und weiteren widgets bestückt werden und...
+
+* ...bieten so die Möglichkeit einen Überblick mit selektiven "Deep-Dives" zu verbinden.
+
+* ...können in Form von storyboards gestaltet werden, um den Leser durch das Dashboard zu führen.
+
+* ...sollten unter Berücksichtigung der Grundsätze "guter" Datenvisualisierung gestaltet werden.
+
+* ...sind nur so gut, wie die zur Erzeugung der Statistiken/Diagramme benutzten Daten.
+
+* ...sind mit der flexdashboard-Bibliothek in `r fa('r-project')` flexibel und einfach umsetzbar.
+
+* ...können durch Einbindung von shiny-Apps noch interkativer gestaltet werden.
+]
 
 
 ---
