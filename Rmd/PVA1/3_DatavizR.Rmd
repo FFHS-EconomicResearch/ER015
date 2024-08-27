@@ -67,7 +67,7 @@ library(fontawesome)
 <br>
 <br>
 <br>
-### HS 2023 
+### HS 2024-25 
 <br>
 ### Prof. Dr. Jörg Schoder
 .mycontacts[
@@ -81,7 +81,7 @@ layout: true
 
 <div class="my-footer"></div>       
 
-<div style="position: absolute;left:400px;bottom:10px;font-size:9px">`r r2symbols::sym('copyright')``r rmarkdown::metadata$author`</div>
+<div style="position: absolute;left:400px;bottom:10px;font-size:9px">`r fa('creative-commons')``r rmarkdown::metadata$author`</div>
 
 
 
@@ -220,9 +220,8 @@ class: left
 ```{r}
 #| echo: false
 #| fig-align: 'center'
-#| out-width: '65%'
-knitr::include_graphics('http://euclid.nmu.edu/~joshthom/Teaching/DAT309/Week1/ggplot2_layers.png
-')
+#| out-width: '45%'
+knitr::include_graphics('https://michielnoback.github.io/bincourses/course_contents/davur2/book/graphics/all_layers_50p.png#center')
 ```
 
 ???
@@ -382,23 +381,26 @@ class: left
 #| warning: false
 # Setup ----
 source(xfun::from_root('R','00_setup.R'))
-# Daten importieren -----
+```
 
+```{r}
+#| echo: true
+# Daten importieren -----
 ## filename ----
 date <- '2023-04-16'
 my_in_file <- glue::glue('bev_struktur_{date}.rds')
-
-## load ----
+## load rds ----
 load(file=xfun::from_root('data','tidy',my_in_file))
 head(bev_struktur)
 ```
+
 
 ---
 class: left
 
 .blockquote[Schritt für Schritt zum Diagramm]
 
-## Vereinfachung: Nur 2021
+## Vereinfachung: Beschränkung auf das Jahr 2021
 
 ```{r}
 #| echo: false
@@ -418,9 +420,9 @@ class: left
 
 
 ```{r}
-#| echo: false
+#| echo: true
 #| fig-align: 'center'
-#| out-width: '30%'
+#| out-width: '50%'
 p <- tbl_pop %>% 
              ggplot()
 p
@@ -437,9 +439,9 @@ class: left
 .panelset[
 .panel[.panel-name[x-Achse]
 ```{r}
-#| echo: false
-#| fig-align: 'default'
-#| out-width: '50%'
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '40%'
 p <- tbl_pop %>% 
              ggplot(aes(x = Alter))
 p
@@ -447,9 +449,9 @@ p
 ]
 .panel[.panel-name[y-Achse]
 ```{r}
-#| echo: false
-#| fig-align: 'default'
-#| out-width: '50%'
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '40%'
 p <- tbl_pop %>% 
            ggplot(aes(y = Anzahl))
 p
@@ -466,13 +468,132 @@ class: left
 
 Zusammenspiel von `aes()`- und `geom_()`-Funktionen
 ```{r}
-#| echo: false
-#| fig-align: 'default'
-#| out-width: '50%'
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '40%'
 p <- tbl_pop %>% 
-           ggplot(aes(x = Alter,y = Anzahl))
+           ggplot(aes(x = Alter, y=Anzahl))
 p <- p + geom_bar(aes(fill = Geschlecht), stat='identity')
-p
+p 
+```
+
+
+
+
+
+
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Layer hinzufügen
+
+Achsen tauschen 
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '40%'
+p + coord_flip()
+```
+
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Achsenmanipulation
+
+```{r}
+#| echo: false
+tbl_plot <- bev_struktur %>% 
+                mutate(Anzahl=if_else(Geschlecht=="w",-Anzahl,Anzahl))
+tbl_plot %>% 
+  arrange(desc(Geschlecht)) %>% head()
+```
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Und nochmal...
+
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '35%'
+p <- tbl_plot %>% 
+           ggplot(aes(x = Alter, y=Anzahl))
+p <- p + geom_bar(aes(fill = Geschlecht), stat='identity')
+p + coord_flip()
+```
+--
+Was stimmt nicht?
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Faceting
+
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '50%'
+p + coord_flip() + facet_wrap(~Simulationsjahr)
+
+```
+
+
+
+
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Final Layout
+
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '25%'
+# Plot zwischenspeichern
+p <- p + coord_flip() + facet_wrap(~Simulationsjahr)
+# Farben definieren
+myCols <- c("#232461","#D84116")
+p + scale_fill_manual(values = myCols,breaks=c("m", "w"), labels=c("Männlich", "Weiblich")) +
+  theme_light() +
+  theme(legend.position="bottom",axis.text=element_text(size=14),
+        axis.title=element_text(size=14,face="bold"),strip.text.x = element_text(size = 16, face = "bold"),
+        legend.title=element_text(size=14,face="bold"),legend.text=element_text(size=14),panel.spacing.x = unit( 1, "cm" ),
+        panel.spacing.y = unit( 0.5, "cm" ))
+```
+
+---
+name: PyrCH 
+class: left
+
+.blockquote[Übung]
+
+## Erzeugt ein Diagramm zum Schweizer Bevölkerungsaufbau
+
+* Die Daten gibt es hier:
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_url('https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung/stand-entwicklung.html',height = "440px")
 ```
 
 

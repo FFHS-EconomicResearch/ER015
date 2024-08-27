@@ -67,7 +67,7 @@ library(fontawesome)
 <br>
 <br>
 <br>
-### HS 2023 
+### HS 2024-25 
 <br>
 ### Prof. Dr. Jörg Schoder
 .mycontacts[
@@ -81,8 +81,7 @@ layout: true
 
 <div class="my-footer"></div>       
 
-<div style="position: absolute;left:400px;bottom:10px;font-size:9px">`r r2symbols::sym('copyright')``r rmarkdown::metadata$author`</div>
-
+<div style="position: absolute;left:400px;bottom:10px;font-size:9px">`r fa('creative-commons')``r rmarkdown::metadata$author`</div>
 
 
 ---
