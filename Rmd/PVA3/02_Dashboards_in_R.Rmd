@@ -77,7 +77,7 @@ bib <- ReadBib(xfun::from_root("lit","my_bib.bib"))
 <br>
 <br>
 <br>
-### HS 2023 
+### HS 2024 
 <br>
 ### Prof. Dr. Jörg Schoder
 .mycontacts[

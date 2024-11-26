@@ -541,7 +541,7 @@ knitr::include_url('http://insideairbnb.com/get-the-data')
 
 ```{r,echo=TRUE}
 ### Daten importieren ----
-tbl_rbnb <- read_csv("http://data.insideairbnb.com/germany/be/berlin/2023-06-22/data/listings.csv.gz")
+tbl_rbnb <- read_csv("https://data.insideairbnb.com/germany/be/berlin/2024-06-22/data/listings.csv.gz")
 ```
 
 ### Webscraping und APIs
