@@ -84,51 +84,42 @@ layout: true
 ---
 class: title-slide
 
-# What is data storytelling? 
+# Was ist Data Storytelling? 
 
 
 ---
 name: storytelling
 class: left
 
-.blockquote[What is story telling]
+.blockquote[Was ist Data Storytelling?]
 
-## Storytelling
+## Storytelling - Motivation
 
-
-
-.panelset[
-.panel[.panel-name[Why?]
-.blockquote[
-“The most powerful person in the world is the story teller. The storyteller sets the vision, values and agenda of an entire generation that is to come”
-.tr[
-Steve Jobs
-]
-]
-`r fa('circle-right')` Humans are narrative creatures
-]
-.panel[.panel-name[How?]
-
-* Narratives have a structure
-
+.pull-left[
 ```{r}
 #| echo: false
 #| fig-align: 'center'
 #| out-width: '75%'
-knitr::include_graphics('https://i.pinimg.com/originals/b2/87/02/b28702c292445ff0032639aa1318b3b1.jpg')
+knitr::include_graphics(xfun::from_root("img","PVA1","Steve_Jobs_WWDC07_(Wikipedia).jpg"))
 ```
 
-
-.quellePanURL[Source: [cartoonwrestling.blogspot.com](https://cartoonwrestling.blogspot.com/2021/08/the-storyteller-book-synopsis-latest.html).]
-
+]
+.pull-right[
+.blockquote[
+"The most powerful person in the world is the story teller. The storyteller sets the vision, values and agenda of an entire generation that is to come"
+.tr[
+Steve Jobs
 ]
 ]
 
 
+`r fa('circle-right')` Menschen sind narrative Wesen!
 
+]
 
+???
 
-
+Humans are narrative creatures
 
 
 
@@ -136,33 +127,271 @@ knitr::include_graphics('https://i.pinimg.com/originals/b2/87/02/b28702c292445ff
 name: Shiller
 class: left 
 
-.blockquote[What is story telling]
+.blockquote[Was ist Data Storytelling?]
 
 ## Narrative Economics
 
 <iframe width="1100" height="460" src="https://www.youtube.com/embed/SCNzE3FbVEY?si=_BBV4HK_JcQJYYlD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-
-
-
-
 ---
 name: bst
 class: left
 
-.blockquote[What is story telling]
+.blockquote[Was ist Data Storytelling?]
 
 ## Business Story Telling
 
 <iframe width="1100" height="460" src="https://www.youtube.com/embed/2fiwKk2LsFw?si=R9dhyONHa6W77bvv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+
+---
+name: frameworks
+class: left
+
+.blockquote[Was ist Data Storytelling?]
+
+## Storytelling - Narrative haben eine Struktur
+
+.panelset[
+.panel[.panel-name[Klassische]
+<div style="font-size: 12px;">
+<table>
+  <tr>
+    <th>Ansatz / Modell</th>
+    <th>Kurzbeschreibung</th>
+    <th>Beispiel / Einsatz</th>
+  </tr>
+  <tr>
+    <td><b>Aristotelische Drei-Akt-Struktur</b></td>
+    <td>Einleitung (Exposition) – Konflikt (Konfrontation) – Auflösung (Peripetie/Resolution). Sehr klare, logische Dramaturgie.</td>
+    <td>Theater, Film, klassische Reden</td>
+  </tr>
+  <tr>
+    <td><b>Freytags Pyramide (Fünf-Akt-Struktur)</b></td>
+    <td>Exposition → steigende Handlung → Höhepunkt → fallende Handlung → Katastrophe/Lösung. Betonung der Spannungskurve.</td>
+    <td>Dramen, epische Erzählungen</td>
+  </tr>
+  <tr>
+    <td><b>Heldenreise (Joseph Campbell, Vogler)</b></td>
+    <td>Der Held verlässt seine gewohnte Welt, erlebt Prüfungen, erhält Hilfe, kehrt verwandelt zurück.</td>
+    <td>Filme (z. B. Star Wars), Unternehmens- oder Markenstorys</td>
+  </tr>
+  <tr>
+    <td><b>Kishōtenketsu (asiatische Struktur)</b></td>
+    <td>Vier Teile: Einführung (Ki), Entwicklung (Shō), Wendung (Ten), Abschluss (Ketsu). Weniger Konflikt, mehr überraschende Wendung.</td>
+    <td>Manga, asiatische Erzählkunst</td>
+  </tr>
+  <tr>
+    <td><b>In medias res / Kreisstruktur</b></td>
+    <td>Einstieg direkt im Geschehen oder Wiederkehr zum Anfang; Geschichten werden zyklisch oder fragmentarisch erzählt.</td>
+    <td>Moderne Literatur, Kurzgeschichten</td>
+  </tr>
+</table>
+</div>
+]
+
+.panel[.panel-name[Moderne]
+<div style="font-size: 12px;">
+<table>
+  <tr>
+    <th>Ansatz / Modell</th>
+    <th>Kurzbeschreibung</th>
+    <th>Beispiel / Einsatz</th>
+  </tr>
+  <tr>
+    <td><b>Golden Circle (Simon Sinek)</b></td>
+    <td>Storytelling über „Why – How – What“: Sinn/Antrieb zuerst, dann Vorgehen, dann Produkt.</td>
+    <td>Unternehmenskommunikation, Leadership</td>
+  </tr>
+  <tr>
+    <td><b>Problem – Agitate – Solve (PAS)</b></td>
+    <td>Erst Problem schildern, dann Leid/Druck verstärken, schließlich Lösung anbieten.</td>
+    <td>Werbung, Verkaufsgespräche</td>
+  </tr>
+  <tr>
+    <td><b>Challenge – Choice – Outcome</b></td>
+    <td>Protagonist steht vor einer Herausforderung, trifft eine Entscheidung, erlebt die Konsequenzen.</td>
+    <td>Change Management, Coaching</td>
+  </tr>
+  <tr>
+    <td><b>Data Storytelling</b></td>
+    <td>Fakten & Zahlen werden in Narrativen eingebettet, um Relevanz und Bedeutung herzustellen.</td>
+    <td>Business Reports, Präsentationen</td>
+  </tr>
+  <tr>
+    <td><b>Story Spine (Pixar)</b></td>
+    <td>„Es war einmal … Jeden Tag … Eines Tages … Deshalb … Bis schließlich …“ – Baukasten für einfache, nachvollziehbare Storys.</td>
+    <td>Kinder- und Unternehmensgeschichten</td>
+  </tr>
+  <tr>
+    <td><b>Digital Storytelling</b></td>
+    <td>Multimediale, oft interaktive Narrative (Text, Bild, Video, Social Media) mit Fokus auf Engagement.</td>
+    <td>Online-Kampagnen, Education</td>
+  </tr>
+</table>
+</div>
+]
+.panel[.panel-name[Verbreitung]
+<div style="font-size: 12px;">
+
+<table role="table" aria-label="Verbreitung von Narrativen im Einsatz" style="border-collapse:collapse; width:100%; max-width:900px;">
+
+  <thead>
+    <tr>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left;">Narrativ / Struktur</th>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left;">Typischer Einsatz</th>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left;">Verbreitung in der Praxis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;"><strong>Heldenreise</strong></td>
+      <td style="border:1px solid #ddd; padding:8px;">Filme, Markenstories, Leadership</td>
+      <td style="border:1px solid #ddd; padding:8px;">★★★★★ sehr hoch</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;"><strong>Problem–Lösung (PAS)</strong></td>
+      <td style="border:1px solid #ddd; padding:8px;">Marketing, Sales</td>
+      <td style="border:1px solid #ddd; padding:8px;">★★★★★ sehr hoch</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;"><strong>David vs. Goliath (Underdog)</strong></td>
+      <td style="border:1px solid #ddd; padding:8px;">Startups, Sport, Politik</td>
+      <td style="border:1px solid #ddd; padding:8px;">★★★★ hoch</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;"><strong>Data Storytelling</strong></td>
+      <td style="border:1px solid #ddd; padding:8px;">Business, Consulting, Research</td>
+      <td style="border:1px solid #ddd; padding:8px;">★★★★ hoch</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;"><strong>Freytags Pyramide (Fünf-Akt)</strong></td>
+      <td style="border:1px solid #ddd; padding:8px;">Theater, Literatur, Film-Dramaturgie</td>
+      <td style="border:1px solid #ddd; padding:8px;">★★★ mittel (implizit häufig, explizit selten)</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;"><strong>Kishōtenketsu</strong></td>
+      <td style="border:1px solid #ddd; padding:8px;">Asiatische Storys, Manga</td>
+      <td style="border:1px solid #ddd; padding:8px;">★★ eher gering (außerhalb Asien)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+]
+]
+
+
+---
+name: frameworks
+class: left
+
+.blockquote[Was ist Data Storytelling?]
+
+## Storytelling - ausgewählte Strukturen
+
+.panelset[
+.panel[.panel-name[Freytag]
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '75%'
+knitr::include_graphics('https://i.pinimg.com/originals/b2/87/02/b28702c292445ff0032639aa1318b3b1.jpg')
+```
+
+<br>
+<br>
+.quellePanURL[Source: [cartoonwrestling.blogspot.com](https://cartoonwrestling.blogspot.com/2021/08/the-storyteller-book-synopsis-latest.html).]
+
+
+]
+.panel[.panel-name[Campbell]
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '50%'
+knitr::include_graphics(xfun::from_root("img","PVA1","Heroesjourney_(Wikipedia).svg"))
+```
+
+
+
+.quellePanURL[Source: [en.wikipedia.org](https://en.wikipedia.org/wiki/Steve_Jobs#/media/File:Steve_Jobs_WWDC07.jpg).]
+
+
+
+]
+
+.panel[.panel-name[PAS]
+<div class="pas-diagram">
+  <div class="element">
+    <div class="icon">❗</div>
+    <h3>Das Problem</h3>
+    <p>Beschreibe ein Problem, das einen Bezug zur Zielgruppe hat.</p>
+  </div>
+  <div class="element">
+    <div class="icon">⚡</div>
+    <h3>Agitate</h3>
+    <p>Verstärke die Wahrnehmung des Problems, betone Frust oder Konsequenzen.</p>
+  </div>
+  <div class="element">
+    <div class="icon">💡</div>
+    <h3>Lösung</h3>
+    <p>Präsentiere die Idee oder das Produkt als Lösung des Problems.</p>
+  </div>
+</div>
+
+<style>
+.pas-diagram {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 0.85em;
+}
+.pas-diagram .element {
+  flex: 1;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.pas-diagram .icon { font-size: 32px; margin-bottom:6px; }
+.pas-diagram h3 { font-size: 14px; margin:6px 0; }
+.pas-diagram p { font-size:12px; line-height:1.3; }
+</style>
+]
+
+]
+
+
+???
+
+* Narratives have a structure
+
+* Freytag
+
+* Campbell - Heldenreise - analysierte 1000 Märchen und Mythen und identifizierte eine gemeinsame Struktur
+
+[Gebauer](https://susannagebauer.com/blog/business-storytelling-frameworks/)
+
+
+
+
+
+
+
+
+
 ---
 name: sampleslide
 class: left
 
-.blockquote[What is story telling]
+.blockquote[Was ist Data Storytelling?]
 
-## Storytelling with Data 
+## Storytelling mit Daten 
 
 
 ```{r}
@@ -185,100 +414,242 @@ knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/0/0b/191
 name: sampleslide
 class: left
 
-.blockquote[What is story telling]
+.blockquote[Was ist Data Storytelling?]
 
-## Storytelling with Data 
+## Storytelling mit Daten 
+
+* Was ist Data Storytelling?
+  * Data Storytelling nutzt die Kraft von Daten, um unsere Vorstellungskraft anzuregen, ohne uns mit trockenen Zahlen und Statistiken zu überfrachten.
+  * Es ist eine wirkungsvolle Mischung: Daten-„Nuggets” werden in fantasievolle Visualisierungen umgewandelt, um eine fesselnde Geschichte zu erzählen.
+
+--
+* Schon lange vor dem Internet haben Menschen Visualisierungen genutzt, um Geschichten zu erzählen.
+
+--
+* Vor 30.000 Jahren malten unsere Vorfahren Tiere wie Bisons und Darstellungen ihrer selbst bei der Jagd an Höhlenwände und schnitzten Glyphen, um andere Aspekte ihres prähistorischen Lebens zu vermitteln.
+
+--
+* Visuelles Storytelling ist nach wie vor eine äußerst wirkungsvolle und universell zugängliche Methode, um Ideen zu vermitteln und mit anderen in Kontakt zu treten.
+
+
+
+
+???
+
 
 * What Is Data Storytelling?
   * Data storytelling harnesses the power of data to capture our imagination, without overloading us with dry numbers and statistics.
   * It’s a powerful mixture: data “nuggets” are transformed into imaginative visuals to tell a compelling story
 
---
-
 * Humans have been using visuals to tell stories long before the internet,
-
---
 
 * 30,000 years ago, our ancestors painted animals like bison, and depictions of themselves hunting onto cave walls, as well as carving glyphs to communicate other aspects of their prehistoric lives.
 
---
 
 * Visual storytelling remains an extremely powerful and universally accessible way of sharing ideas and connecting with others.
 
---
 
 * **Data storytelling** on the web borrows this power to elevate statistics, numbers, and other data that can otherwise get lost in lengthy blocks of text.
+
+
+---
+class: left
+
+.blockquote[Was ist Data Storytelling?]
+
+## Balance zwischen Information und Emotion
+
+<div class="quadrant-diagram" style="max-width:800px; margin:auto;">
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" width="800" height="450"
+     style="font-family: system-ui, sans-serif;">
+
+  <!-- Hintergrund Quadranten -->
+  <rect x="0" y="0" width="400" height="225" fill="#f7fbff"/>
+  <rect x="400" y="0" width="400" height="225" fill="#eef9f3"/>
+  <rect x="0" y="225" width="400" height="225" fill="#f6f6f6"/>
+  <rect x="400" y="225" width="400" height="225" fill="#fffaf0"/>
+
+  <!-- Achsen -->
+  <line x1="0" y1="225" x2="800" y2="225" stroke="#333" stroke-width="3"/>
+  <line x1="400" y1="0" x2="400" y2="450" stroke="#333" stroke-width="3"/>
+
+  <!-- Achsen-Beschriftung -->
+  <text x="780" y="215" text-anchor="end" font-size="20" font-weight="bold">mehr Information →</text>
+  <text x="410" y="30" text-anchor="start" font-size="20" font-weight="bold">↑ mehr Emotion</text>
+
+  <!-- Quadranten-Beschriftungen (eine Zeile) -->
+  <text x="200" y="130" text-anchor="middle" font-size="62" font-weight="bold" letter-spacing="-1px">
+    unterhaltsame Geschichte
+  </text>
+
+  <text x="600" y="130" text-anchor="middle" font-size="62" font-weight="bold" letter-spacing="-1px">
+    überzeugende Geschichte
+  </text>
+
+  <text x="200" y="340" text-anchor="middle" font-size="62" font-weight="bold" letter-spacing="-1px">
+    langweilige Geschichte
+  </text>
+
+  <text x="600" y="340" text-anchor="middle" font-size="62" font-weight="bold" letter-spacing="-1px">
+    faktenbasierte Geschichte
+  </text>
+
+  <!-- Subtexte -->
+  <text x="200" y="170" font-size="16" fill="#333" text-anchor="middle">wenig Info — starkes Gefühl</text>
+  <text x="600" y="170" font-size="16" fill="#333" text-anchor="middle">viel Info — starkes Gefühl</text>
+  <text x="200" y="380" font-size="16" fill="#333" text-anchor="middle">wenig Info — schwaches Gefühl</text>
+  <text x="600" y="380" font-size="16" fill="#333" text-anchor="middle">viel Info — schwaches Gefühl</text>
+
+</svg>
+
+<div class="legend" style="margin-top:10px; font-size:12px; color:#555;">
+  <strong>Legende:</strong> horizontale Achse = Information (links = wenig, rechts = viel), vertikale Achse = Emotion (unten = wenig, oben = viel).
+</div>
+</div>
+
+.quelle[Eigene Darstellung.]
+
+???
+
+Stories speak to emotions - Problem: Wissenschaft "speaks" to Vernunft
+
+Balance zwischen Selling von Argumenten und Bias
+
+---
+class: left
+
+.blockquote[Was ist Data Storytelling?]
+
+## Gruppenaufgabe
+
+1. Jede Gruppe wählt oder bekommt eine Storytelling-Struktur zugewiesen.
+
+2. Inhaltlicher Rahmen
+
+Thema: „Auswirkungen von Künstlicher Intelligenz auf den Arbeitsmarkt“
+
+Ziel: Dfiniert eine Zielgruppe und entwickelt ein Narrativ in der vorgegebenen Struktur.
+
+
+---
+class: inverse,center,middle
+
+# Wir brauchen eine Pause.
+
+---
+
+background-image: url("http://bit.ly/cs631-donkey")
+background-size: cover
 
 ---
 name: sampleslide
 class: left
 
-.blockquote[What is story telling]
+.blockquote[Was ist Data Storytelling?]
 
-## How To Use Data Storytelling
+## Einsatz von Data Storytelling
 
-* Data storytelling isn’t just a fancy term for “nicer-looking reports”
+* Daten-Storytelling ist nicht nur ein schicker Begriff für „besser aussehende Berichte“.
 
 --
+
+* Von Großunternehmen bis hin zum Journalismus wird es im gesamten Internet kreativ eingesetzt, um Zeitachsen zu veranschaulichen, Fakten und Zahlen zu vermitteln 
+und andere quantitative Informationen darzustellen.
+
+--
+
+* Unternehmen nutzen Daten-Storytelling für zusammenfassende Jahresberichte, Investorenpräsentationen, Nachhaltigkeits- und Wirkungsberichte, Sensibilisierungskampagnen usw.
+
+--
+
+* Es ist eine Möglichkeit, sich von anderen abzuheben und Markengeschichten auf eine Weise zu erzählen, die unsere Aufmerksamkeit fesselt.
+
+???
+
+* Data storytelling isn’t just a fancy term for “nicer-looking reports”
 
 * From big business to journalism, it’s used imaginatively all over the web to illustrate timelines, communicate facts and 
 figures, and display other quantitative information.
 
---
-
 * Companies use data storytelling for wrap-up annual reports, investor pitches, sustainability and impact reports, awareness campaigns, etc...
 
---
 
 * It’s a way to differentiate themselves, and to tell brand narratives in a way that holds our attention.
 
----
 
+
+---
 name: sampleslide
 class: left
 
-.blockquote[What is story telling]
+.blockquote[Was ist Data Storytelling?]
 
-## How To Use Data Storytelling
+## Einsatz von Data Storytelling
+
+* Medienpublikationen wie Zeitungen nutzen häufig Data Storytelling, um Geschichten zu erzählen, die über das hinausgehen, was in Printmedien möglich ist.
+
+--
+
+* Data Storytelling ermöglicht es, Fakten und Statistiken auf fantasievollere Weise zu präsentieren.
+
+--
+
+* Beim Data Storytelling kommen häufig Medien wie Infografiken, Datenvisualisierungen, interaktive Karten und Feature-Artikel zum Einsatz.
+
+--
+
+* Grafiken sind leichter zu verstehen und zu merken als trockene/langweilige Zahlen in einer Tabelle. 
+
+
+???
+
 
 * Media publications, like newspapers, frequently use data storytelling to tell stories that go beyond what’s possible in print
 
---
 
 * Data storytelling makes it possible to present facts and statistics in a way that’s more imaginative.
 
---
 
 * Data storytelling often employsmediums like infographics, data visualisations, interactive maps, and feature articles
 
---
 
 * Graphics are easier to understand/remember than plain boring numbers in a table 
+
+
 
 ---
 
 name: sampleslide
 class: left
 
-.blockquote[What is story telling]
+.blockquote[Was ist Data Storytelling?]
 
-## The business of data storytelling
+## Data Storytelling in Unternehmen
+
+Gründe, warum Unternehmen in Data Storytelling investieren sollten:
+
+--
+
+1. **Data Storytelling ist gut für das Branding**: Data Storytelling hilft Ihnen dabei, sich einen Ruf als Experte aufzubauen, was den Wert Ihrer Marke festigt.  
+
+--
+
+2. **Data Storytelling ist leistungsstark**: Data Stories schneiden in der Regel gut bei den Kennzahlen ab, die für Content-Marketing-Teams wichtig sind, darunter Verweildauer auf der Seite, Absprungraten usw.
+
+--
+
+3. **Data Storytelling ist skalierbar**: Sie können beeindruckende Daten-Stories erstellen, ohne in Entwickler investieren zu müssen.
+
+
+???
 
 Here are four reasons organisations should invest in data storytelling:
 
---
-
 1. **Data storytelling is good for branding**: Data storytelling will help you build a reputation for expertise, which will cement the value of your brand.  
-
---
 
 2. **Data storytelling performs well**: Data stories tend to perform well on the metrics content marketing teams care about, including time-on-page, bounce rates etc
 
---
-
 3. **Data storytelling can scale**: you can create amazing-looking data stories without investing in developers
-
---
 
 4. **Data storytelling can help you know — and grow — your business**: Check rise of amazing data storytelling within organisations, using dashboards and other business analytics tools that data analysts use to generate data insights for their business.
 
@@ -302,24 +673,6 @@ knitr::include_graphics(xfun::from_root('img','PVA1','Lewandowski.png'))
 
 
 
----
-
-name: sampleslide
-class: left
-
-.blockquote[Great graphical examples]
-
-## UN Synthetic Drug strategy 
-
-* Awareness page from the United Nations Office of Drugs and Crime (UNODC)
-
---
-
-* Scrolling down reveals detail after detail about substance abuse and drug manufacturing pointing to the countries they’re associated with.
-
---
-
-* Page resents a huge list of details in a way that’s not only creative, but makes it easier to see their relevance
 
 ---
 
@@ -336,33 +689,21 @@ class: left
 knitr::include_url("https://vvv.vev.site/unodc-syntheticdrugstrategy-en/",height = '460px')
 ```
 
----
+???
 
-name: sampleslide
-class: left
+* Awareness page from the United Nations Office of Drugs and Crime (UNODC)
 
-.blockquote[Great graphical examples]
+* Scrolling down reveals detail after detail about substance abuse and drug manufacturing pointing to the countries they’re associated with.
 
-## Spotify For Artists 2022 Fan Study
+* Page resents a huge list of details in a way that’s not only creative, but makes it easier to see their relevance
 
---
-
-* The report takes the data from our listening habits and spins it into an exciting audio and visual experience.
-
---
-
-* This 2022 Fan Study enlightens musicians about how listeners’ habits and engagements can affect how many followers they have and how often their music gets streamed.
-
---
-
-* The report broken down into several subsections including engagement, merch, and release, with each section showing Spotify user data, and explaining what it means
 
 ---
 
 name: sampleslide
 class: left
 
-.blockquote[Great graphical examples]
+.blockquote[Paradebeispiele]
 
 ## Spotify For Artists 2022 Fan Study
 
@@ -373,35 +714,23 @@ class: left
 knitr::include_url("https://fanstudy.byspotify.com/edition/merch",height = '460px')
 ```
 
----
+???
+* The report takes the data from our listening habits and spins it into an exciting audio and visual experience.
 
-name: sampleslide
-class: left
 
-.blockquote[Great graphical examples]
+* This 2022 Fan Study enlightens musicians about how listeners’ habits and engagements can affect how many followers they have and how often their music gets streamed.
 
-## Impossible 
 
-* Impossible has won over many vegetarians as well as meat-eaters with their plant-based products like their popular Impossible Burger
+* The report broken down into several subsections including engagement, merch, and release, with each section showing Spotify user data, and explaining what it means
 
---
 
-* This food impact slider shows the effect meat consumption has on the environment. 
-
---
-
-* The more you move the slider—which represents replacing eating meat with plant-based options in terms of weight—the more you see your environmental impact reduce.
-
---
-
-* It’s a powerful graphic that isn’t about shaming us, but showing all the good that can happen to the environment by changing the way we eat.  
 
 ---
 
 name: sampleslide
 class: left
 
-.blockquote[Great graphical examples]
+.blockquote[Pardebeispiele]
 
 ## [Impossible](https://impossiblefoods.com/ecological-footprint-calculator)
 
@@ -412,12 +741,23 @@ class: left
 knitr::include_url("https://impossiblefoods.com/ecological-footprint-calculator",height = '460px')
 ```
 
+???
+
+* Impossible has won over many vegetarians as well as meat-eaters with their plant-based products like their popular Impossible Burger
+
+* This food impact slider shows the effect meat consumption has on the environment. 
+
+* The more you move the slider—which represents replacing eating meat with plant-based options in terms of weight—the more you see your environmental impact reduce.
+
+* It’s a powerful graphic that isn’t about shaming us, but showing all the good that can happen to the environment by changing the way we eat. 
+
+
 ---
 
 name: sampleslide
 class: left
 
-.blockquote[Great graphical examples]
+.blockquote[Paradebeispiel]
 
 ## FaceBook sustainability report
 
@@ -435,7 +775,7 @@ knitr::include_graphics(xfun::from_root('img','PVA1','FB.avif'))
 name: sampleslide
 class: left
 
-.blockquote[Great graphical examples]
+.blockquote[Paradebeispiele]
 
 ## Life on Mars
 
@@ -451,7 +791,7 @@ knitr::include_graphics(xfun::from_root('img','PVA1','LifeMars.avif'))
 name: sampleslide
 class: left
 
-.blockquote[Great graphical examples]
+.blockquote[Paradebeispiele]
 
 ## Coffee Time
 
@@ -469,7 +809,7 @@ knitr::include_graphics(xfun::from_root('img','PVA1','CafeTime.avif'))
 name: sampleslide
 class: left
 
-.blockquote[Great graphical examples]
+.blockquote[Paradebeispiele]
 
 ## Digital Trends
 
@@ -484,28 +824,28 @@ knitr::include_url("https://vvv.vev.site/digital-trends---live-example",height =
 name: elements-swd
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
 ## Elements of Data Storytelling
 
-* data
+* Daten
 
 --
 
-* visuals
+* Visualisierungen
 
 --
 
-* narrative
+* Narrative
 
 
 ---
 name: tufte
 class: left
 
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-
-## Tufte's Principles
+## Tufte's Prinzipien
 
 
 .pull-left[
@@ -530,31 +870,39 @@ knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/thumb/4/
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## The problem with SwD
+## Das SwD-Problem
 
-* There is a LOT of bad graphs out there!
+* Es gibt eine Menge schlechter Grafiken!
 
 --
+
+* Wir sind von Natur aus nicht gut darin, mit Daten Geschichten zu erzählen
+* In der Schule lernen wir viel Mathematik und Sprache
+* Diese beiden Bereiche sind nicht miteinander verbunden: Niemand bringt uns bei, wie man mit Zahlen Geschichten erzählt.
+
+--
+
+* Sie beherrschen Microsoft Office? Das tun alle anderen auch!
+
+???
+
+* There is a LOT of bad graphs out there!
 
 * We aren’t naturally good at storytelling with data
   * We learn a lot of math and language at school
   * These two sides are not paired: no one teaches us how to tell stories with numbers.
-  
---
 
 * Skilled in Microsoft Office? So is everyone else!
 
 ---
-
-
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## Do you see the difference?
+## Seht Ihr den Unterschied?
 
 ```{r}
 #| echo: false
@@ -569,20 +917,20 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic1.png'))
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## What improvement do you see between top vs bottom plot?
+## Welche Verbesserungsmöglichkeiten seht Ihr?
 
-* (Don't be shy)
+* (Traut Euch!)
 
 ---
 
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## Do you see the difference?
+## Seht Ihr den Unterschied?
 
 ```{r}
 #| echo: false
@@ -597,20 +945,19 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic2.png'))
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## Again, what improvement do you see between top vs bottom plot?
+## Nochmal, welche Verbesserungsmöglichkeiten seht Ihr?
 
-* (Don't be shy)
+* (Traut Euch!)
 
 ---
-
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## Chossing a visual effect
+## Wahl visueller Effekte
 
 ```{r}
 #| echo: false
@@ -625,21 +972,22 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic4.png'))
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## Simple text
+## Einfache Texte
 
-* With just a number or two to share, simple text can be a great way to communicate.
-
---
-
-* Solely the number (prominent!) and a few supporting words to clearly make your point.
+* Wenn Sie nur ein oder zwei Zahlen mitteilen möchten, kann ein einfacher Text eine gute Möglichkeit zur Kommunikation sein.
 
 --
 
-* Putting one or only a couple of numbers in a table or graph simply causes the numbers to lose some of their oomph
+* Nur die Zahl (gut sichtbar!) und ein paar ergänzende Worte, um Ihren Standpunkt klar zu machen.
 
 --
+
+* Wenn Sie nur eine oder wenige Zahlen in eine Tabelle oder Grafik einfügen, verlieren diese Zahlen an Aussagekraft.
+
+--
+
 
 ```{r}
 #| echo: false
@@ -649,29 +997,39 @@ class: left
 knitr::include_graphics(xfun::from_root('img','PVA1','pic5.png'))
 ```
 
+???
+
+* With just a number or two to share, simple text can be a great way to communicate.
+
+* Solely the number (prominent!) and a few supporting words to clearly make your point.
+
+* Putting one or only a couple of numbers in a table or graph simply causes the numbers to lose some of their oomph
+
+
+
 ---
 
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## Simple text
+## Einfache Texte
 
-* The fact that you have some numbers does not mean that you need
-a graph!
-
---
-
-* In the previus pic the graph doesn’t do much to aid in the interpretation of the numbers
+* Die Tatsache, dass Sie einige Zahlen haben, bedeutet nicht, dass Sie
+ein Diagramm benötigen!
 
 --
 
-* In this case, a simple sentence would suffice: 20% of children had a traditional stay‐at‐home mom in 2012, compared to 41% in 1970.
+* Im vorherigen Bild trägt das Diagramm nicht wesentlich zur Interpretation der Zahlen bei.
 
 --
 
-* Or, you can present it as: 
+* In diesem Fall würde ein einfacher Satz ausreichen: 20 % der Kinder hatten 2012 eine traditionelle Hausfrau als Mutter, verglichen mit 41 % im Jahr 1970.
+
+--
+
+* Oder Sie können es wie folgt darstellen: 
 
 ```{r}
 #| echo: false
@@ -680,24 +1038,35 @@ a graph!
 knitr::include_graphics(xfun::from_root('img','PVA1','pic6.png'))
 ```
 
----
+???
 
+* The fact that you have some numbers does not mean that you need
+a graph!
+
+* In the previus pic the graph doesn’t do much to aid in the interpretation of the numbers
+
+* In this case, a simple sentence would suffice: 20% of children had a traditional stay‐at‐home mom in 2012, compared to 41% in 1970.
+
+* Or, you can present it as: 
+
+
+---
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## Scatter plot
+## Streudiagramme
 
-* Great to show the relationship between two quantities 
-
---
-
-* Let’s say that we manage a bus fleet and want to understand  the relationship between miles driven and cost per mile
+* Ideal, um die Beziehung zwischen zwei Größen darzustellen 
 
 --
 
-* Enhancing the pic around the `Avg` point better helps understanding what's going on 
+* Nehmen wir an, wir verwalten eine Busflotte und möchten  die Beziehung zwischen gefahrenen Kilometern und Kosten pro Kilometer verstehen
+
+--
+
+* Eine Verbesserung des Bildes um den Punkt „Avg“ herum hilft besser zu verstehen, was vor sich geht 
 
 ```{r}
 #| echo: false
@@ -708,33 +1077,59 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic7.png'))
 knitr::include_graphics(xfun::from_root('img','PVA1','pic8.png'))
 ```
 
+???
+
+* Great to show the relationship between two quantities 
+
+* Let’s say that we manage a bus fleet and want to understand  the relationship between miles driven and cost per mile
+
+* Enhancing the pic around the `Avg` point better helps understanding what's going on 
+
+
+
 ---
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## Bar plot
+## Balkendiagramm
+
+* Manchmal werden Balkendiagramme gemieden, weil sie weit verbreitet sind. Das ist ein Fehler.
+
+--
+
+* Vielmehr sollten Balkendiagramme gerade deshalb genutzt werden, weil sie weit verbreitet sind, da dies für Ihr Publikum einen geringeren Lernaufwand bedeutet.
+
+--
+
+* Anstatt ihre geistigen Fähigkeiten darauf zu verwenden, zu verstehen, wie man das Diagramm liest, konzentriert sich Ihr Publikum darauf, herauszufinden, welche Informationen es aus der Grafik gewinnen kann.
+
+--
+
+* Balkendiagramme sind für unsere Augen leicht zu lesen. 
+
+--
+
+* Unsere Augen vergleichen die Endpunkte der Balken, sodass schnell erkennbar ist, welche Kategorie die größte und welche die kleinste ist und wie groß der Unterschied zwischen den Kategorien ist. 
+
+--
+
+* WICHTIG: Die Skalierung ist **ALLES**. 
+
+
+???
+
 
 * Sometimes bar charts are avoided because they are common. This is a mistake
 
---
-
 * Rather, bar charts should be leveraged because they are common, as this means less of a learning curve for your audience
-
---
 
 * Instead of using their brain power to try to understand how to read the graph, your audience spends it figuring out what information to take away from the visual.
 
---
-
 * Bar charts are easy for our eyes to read. 
 
---
-
-* Our eyes compare the endpoints of the bars, so it is easy to see quickly which category is the biggest, which is the smallest, and also the incremental difference between categories. 
-
---
+* Our eyes compare the endpoints of the bars, so it is easy to see quickly which category is the biggest, which is the smallest, and also the incremental difference between categories.
 
 * IMPORTANT: The scaling is **EVERYTHING** 
 
@@ -744,13 +1139,13 @@ class: left
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## Bar plot
+## Balkendiagramm
 
-* Top tax rate, pre and post (misleading!).
+* Spitzensteuersatz, vorher/nachher (irreführend!).
 
-* Why? 
+* Warum?
 
 ```{r}
 #| echo: false
@@ -764,19 +1159,17 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic9.png'))
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-## Bar plot
+## Balkendiagramm
 
-* Scale starts at 34% and not at 0% 
+* Achsenskalierung startet bei 34% (statt 0%) 
 
---
 
-* A 13% increase in tax burden ((39.6 – 35) / 35) becomes visually a 460%
+* Eine 13%-ige Zunahme der Steuerlast ((39.6 – 35) / 35) wird visuell zu 460%
 
---
 
-* The heights of the bars are 35 – 34 = 1 and 39.6 – 34 = 5.6, so (5.6 – 1) / 1 = 460%
+* Balkenhöhe: 35 – 34 = 1 und 39.6 – 34 = 5.6, so (5.6 – 1) / 1 = 460%
 
 ```{r}
 #| echo: false
@@ -790,15 +1183,15 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic10.png'))
 name: sampleslide
 class: left
 
-.blockquote[Storytelling with data: some theory]
 
-## The importance of the visual order
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-* Visual order helps get the message quicker 
+## Die Bedeutung der visuellen Ordnung
 
---
+* Visuelle Ordnung hilft dabei, die Kernbotschaft schneller zu erfassen
 
-* The plot on the left is not terrible, but that on the right is better :) 
+* Linkes Diagramm nicht "unbrauchbar", aber das Rechte ist besser
+
 
 ```{r}
 #| echo: false
@@ -809,16 +1202,28 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic11.png'))
 knitr::include_graphics(xfun::from_root('img','PVA1','pic12.png'))
 ```
 
+???
+
+
+* Visual order helps get the message quicker 
+
+
+* The plot on the left is not terrible, but that on the right is better :) 
+
+
+
 ---
 
 name: sampleslide
 class: left
-.blockquote[Storytelling with data: some theory]
-## Decluttering and improving 
 
-**Cluttering**: adding to much cognitive load into a graph
+.blockquote[Storytelling mit Daten: Visualisierung]
 
-* Original graph 
+## Entrümpeln und verbessern
+
+**Cluttering**: überfrachtete Diagramme erhöhen den kognitiven Ballast
+
+* Original
 
 ```{r}
 #| echo: false
@@ -829,13 +1234,14 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic13.png'))
 ```
 
 ---
-
 name: sampleslide
 class: left
-.blockquote[Storytelling with data: some theory]
-## Decluttering and improving 
 
-* Remove chart borders
+.blockquote[Storytelling mit Daten: Visualisierung]
+
+## Entrümpeln und verbessern
+
+* Rahmen
 
 ```{r}
 #| echo: false
@@ -845,14 +1251,16 @@ class: left
 knitr::include_graphics(xfun::from_root('img','PVA1','pic14.png'))
 ```
 
----
 
+---
 name: sampleslide
 class: left
-.blockquote[Storytelling with data: some theory]
-## Decluttering and improving 
 
-* Remove grid lines
+.blockquote[Storytelling mit Daten: Visualisierung]
+
+## Entrümpeln und verbessern
+
+* Gitternetz/-linien
 
 ```{r}
 #| echo: false
@@ -866,10 +1274,13 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic15.png'))
 
 name: sampleslide
 class: left
-.blockquote[Storytelling with data: some theory]
-## Decluttering and improving 
 
-* Clean up axis labels
+.blockquote[Storytelling mit Daten: Visualisierung]
+
+## Entrümpeln und verbessern
+
+
+* Achsenbeschriftungen
 
 ```{r}
 #| echo: false
@@ -882,10 +1293,12 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic16.png'))
 
 name: sampleslide
 class: left
-.blockquote[Storytelling with data: some theory]
-## Decluttering and improving 
 
-* Label data directly
+.blockquote[Storytelling mit Daten: Visualisierung]
+
+## Entrümpeln und verbessern
+
+* Labels
 
 ```{r}
 #| echo: false
@@ -895,14 +1308,18 @@ class: left
 knitr::include_graphics(xfun::from_root('img','PVA1','pic17.png'))
 ```
 
----
 
+
+---
 name: sampleslide
 class: left
-.blockquote[Storytelling with data: some theory]
-## Decluttering and improving 
 
-* Leverage consistent color 
+
+.blockquote[Storytelling mit Daten: Visualisierung]
+
+## Entrümpeln und verbessern
+
+* Konsistente Farben und Farbpaletten
 
 ```{r}
 #| echo: false
@@ -913,13 +1330,14 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic18.png'))
 ```
 
 ---
-
 name: sampleslide
 class: left
-.blockquote[Storytelling with data: some theory]
-## Decluttering and improving 
 
-* Original vs improved 
+.blockquote[Storytelling mit Daten: Visualisierung]
+
+## Entrümpeln und verbessern
+
+* Original vs. verbessert
 
 ```{r}
 #| echo: false
@@ -963,22 +1381,23 @@ knitr::include_graphics(xfun::from_root('img','PVA1','pic19.png'))
 name: sampleslide
 class: left
 
-.blockquote[Great graphical examples]
+.blockquote[Parardebeispiel]
 
-## The SwD-Challenge
+## Die SwD-Challenge
 ```{r}
 #| echo: false
 #| fig-align: 'center'
 knitr::include_url("https://community.storytellingwithdata.com/exercises/good-to-great", height = '460px')
 ``` 
----
 
+
+---
 name: sampleslide
 class: left
 
-.blockquote[Great graphical examples]
+.blockquote[Paradebeispiele]
 
-## More examples
+## Weitere Beispiele 
 ```{r}
 #| echo: false
 #| fig-align: 'center'
@@ -991,6 +1410,15 @@ knitr::include_url("https://shorthand.com/the-craft/examples-of-powerful-data-st
 
 
 
+---
+class: inverse,center,middle
+
+# Wir brauchen eine Pause.
+
+---
+
+background-image: url("http://bit.ly/cs631-donkey")
+background-size: cover
 
 
 
