@@ -66,7 +66,7 @@ library(emo)
 <br>
 <br>
 <br>
-### HS 2023 
+### HS 2025-26
 <br>
 ### Prof. Dr. Jörg Schoder
 .mycontacts[
@@ -260,12 +260,11 @@ class: left
 
 ## Nicht-reproduzierbare Workflows mangels Syntax
 
-<iframe width="1100" height="460" src="https://www.youtube.com/embed/s3JldKoA0zw?si=j9La5wFsBF_-S1_c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
+<iframe width="1100" height="460" src="https://www.youtube.com/embed/s3JldKoA0zw?si=GDXQAY4FSY6aOBf6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ???
 
-Anschauen bis 0:56min
+nur bis 0:56min anschauen
 
 
 ---
@@ -282,14 +281,14 @@ class: left
 #| echo: false
 #| fig-align: 'center'
 #| out-width: '50%'
-knitr::include_graphics('https://xcelab.net/rm/wp-content/uploads/2012/01/9781482253443.jpg')
+knitr::include_graphics(xfun::from_root('img','PVA2','StatisticalRethinking_(McElreath).jpeg'))
 ```
 ]
 
 
 .right-column[
 .blockquote[
-[The command line] also saves you time and fulfills ethical obligations. With command scripts, each analysis documents itself, so that years from now you can come back to your analysis ans replicate it exactly. You can re-use your old files and send them to colleagues. Pointing and clicking, however, leaves no trail of breadcrumps. [...] Once you get in the habit of planning, running and preserving your statistical analysis in this way, it pays for itself many times over. With point-and-click, you pay down the road, rather than only up front.
+[The command line] also saves you time and fulfills ethical obligations. With command scripts, each analysis documents itself, so that years from now you can come back to your analysis ans replicate it exactly. You can re-use your old files and send them to colleagues. Pointing and clicking, however, leaves no trail of breadcrumps. [..] Once you get in the habit of planning, running and preserving your statistical analysis in this way, it pays for itself many times over. With point-and-click, you pay down the road, rather than only up front.
 .tr[
 [McElreath, R. (2016).](https://xcelab.net/rm/statistical-rethinking/)
 ]]
@@ -386,14 +385,23 @@ class: left
 
 ## Reporting bei Airbnb
 
+.pull-left[
 ```{r}
 #| echo: false
 #| fig-align: 'center'
-knitr::include_url('https://peerj.com/preprints/3182.pdf',height = '460px')
+knitr::include_graphics(xfun::from_root("img","PVA2","Airbnb_Paper.png"))
 ```
 
+.quelle[Download: [researchgate.net](https://www.researchgate.net/publication/345691339_How_R_helps_Airbnb_make_the_most_of_its_data/link/5faae4c0a6fdcc331b931caa/download?_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6InB1YmxpY2F0aW9uIiwicGFnZSI6InB1YmxpY2F0aW9uIn19).]
+]
+.pull-right[
+```{r}
+#| echo: false
+#| fig-align: 'center'
+knitr::include_graphics(xfun::from_root("img","PVA2","Airbnb_Package.ppm"))
+```
 
-
+]
 
 
 

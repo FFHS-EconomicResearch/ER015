@@ -1,0 +1,618 @@
+---
+title: "Dataviz using R."
+subtitle: "Intro to ggplot2"
+author: "Prof. Dr. Jörg Schoder"
+institute: "FFHS" 
+date: "`r Sys.Date()`"
+bibliography: ../../lit/my_bib.json
+reference-section-title: Quellenverzeichnis
+output:
+  xaringan::moon_reader:
+    self_contained: true
+    css: 
+         - default
+         - ../../css/ffhs-theme.css
+         - xaringan-themer.css
+    includes:
+      after_body: ../../css/insert-logo.html
+    lib_dir: ../../libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+    
+
+    
+---
+class: title-slide
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+style_xaringan(text_color = "#d50006",inverse_text_color = "#FFFFFF",inverse_background_color = "#d50006", title_slide_background_color = "#d50006",header_background_color = "#d50006",header_color = "#FFFFFF",header_h1_font_size = "32px",
+  header_h2_font_size = "26px",link_color="#502479",
+  header_h3_font_size = "20px",text_slide_number_color = "#d50006",text_slide_number_font_size = "0.5em")
+```
+
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_progress_bar(color = "#d50006", location = "bottom")
+xaringanExtra::use_xaringan_extra(c("tile_view","scribble","panelset","tachyons"))
+xaringanExtra::style_panelset_tabs(font_family = "inherit")
+#xaringanExtra::use_search(show_icon = TRUE)
+#weitere: "share_again","animate_css", "webcam","freezeframe","clipboard","fit_screen","extra-styles" 
+xaringanExtra::use_editable(expires = 1)
+xaringanExtra::use_freezeframe(trigger = "hover")
+``` 
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(latex2exp)
+library(fontawesome)
+```
+
+
+
+# ER015 - Storytelling with Data
+
+## PVA1
+
+### Dataviz using R. Intro to ggplot2.
+
+ 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+### HS 2025-26 
+<br>
+### Prof. Dr. Jörg Schoder
+.mycontacts[
+`r fa('github')` @FFHS-EconomicResearch
+`r fa('linkedin')` @jfschoder
+]
+
+
+---
+layout: true
+
+<div class="my-footer"></div>       
+
+<div style="position: absolute;left:400px;bottom:10px;font-size:9px">`r fa('creative-commons')``r rmarkdown::metadata$author`</div>
+
+
+
+---
+class: left
+
+
+.blockquote[Datenvisualisierung mit ggplot2]
+
+## Warum ggplot2?
+
+.left-column[
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-height: '80%'
+knitr::include_graphics(xfun::from_root('img','PVA1','hadley.jpg'))
+```
+]
+
+.right-column[.font150[
+"The transferrable skills from ggplot2 are not the idiosyncracies of plotting syntax, but a powerful way of thinking about visualisation, as a way of *mapping between variables and the visual properties of geometric objects* that you can perceive." [Headley Wickham](http://disq.us/p/sv640d)
+]
+]
+
+
+
+
+---
+class: left
+
+.blockquote[Datenvisualisierung mit ggplot2]
+
+## Vorteile von ggplot2
+
+* Einfacher und gleichzeitig mächtiger Denkansatz: wie beeinflussen Daten die Visualisierung?
+
+--
+* Funktionale Datenvisualisierung
+  * Daten manipulieren
+  * Zuordnung von Daten zu visuellen Elementen
+  * Anpassung von Skalen, Hilfslinien, Achsen, Beschriftungen und Themen
+
+--
+* Einfach zu iterieren
+
+--
+* Einfach konsistent vorzugehen
+
+
+???
+
+
+
+---
+class: left
+
+## Was haben wir vor?
+
+<br>
+`ggplot2` ist ein beinahe **überwältigendes** Paket: Philosophie + Funktionen
+<br>...aber durch die konsistente Logik ist es durchaus intuitiv
+
+
+--
+
+<br><br>
+Die Flexibilität und vielfältige Möglichkeiten lassen uns 
+<br>...vielleicht Staunen, aber nicht die Orientierung verlieren
+
+--
+
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-height: '50%'
+knitr::include_graphics(xfun::from_root('img','PVA1','poppins-bag-kids.gif'))
+```
+
+
+---
+class: left
+
+## Legen wir los
+
+
+**Easy**: install the [tidyverse](http://tidyverse.org)
+
+```r
+install.packages('tidyverse')
+```
+--
+**Medium**: install just `ggplot2`
+
+```r
+install.packages('ggplot2')
+```
+
+--
+**Expert**: install from GitHub
+
+```r
+devtools::install_github('tidyverse/ggplot2')
+```
+
+---
+class: left
+
+## Load the tidyverse
+
+```{r}
+#| library-tidyverse
+#| echo: true
+#| message: true
+#| warning: true}
+library(tidyverse)
+```
+
+
+
+---
+layout: false
+class: inverse center middle text-white
+
+.font200[gg is for<br>Grammar of Graphics]
+
+
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '25%'
+knitr::include_graphics(xfun::from_root('img','PVA1','hex-ggplot2.png'))
+```
+
+
+---
+name: Intro
+class: left
+
+.blockquote[Intro to ggplot2]
+
+## Layered Grammar of Graphics
+
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '75%'
+knitr::include_graphics(xfun::from_root('img','PVA1','grammar-of-graphics.png'))
+```
+
+.quelle[Bildquelle: [UC Berkeley](https://stat20.berkeley.edu/spring-2024/2-summarizing-data/03-a-grammar-of-graphics/notes.html).]
+???
+
+.blockquote["Good grammar is just the first step in creating a good sentence."]
+
+`https://michielnoback.github.io/bincourses/course_contents/davur2/book/graphics/all_layers_50p.png#center`
+
+---
+name: 
+class: left
+
+.blockquote[Intro to ggplot2]
+
+## Kernkomponenten eines ggplots
+
+
+* **Daten**
+
+--
+* **Abbildungen (mappings)**:
+
+--
+ ästhetischen Abbildungen (aesthetic mappings) als Verknüpfungen zwischen
+Variablen und deren visuellen Eigenschaften in der Grafik 
+
+`r fa('circle-right')` Funktion: `aes()`
+
+--
+* **Schichten/Folien (Layers)**:
+
+--
+ mindestens eine Schicht (Layer), die Anweisungen zur Verarbeitung der einzelnen Beobachtungswerte gibt. Eine Schicht wird dabei meist in Form eines geometrischen Objekts erstellt.
+
+`r fa('circle-right')` Funktion: `geom_()` oder `stat_function()`
+
+
+---
+name: elements
+class: left
+
+.blockquote[Intro to ggplot2]
+
+## Elements of a ggplot
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '90%'
+knitr::include_graphics('http://sape.inf.usi.ch/sites/default/files/imagecache/width600/ggplot2-anatomy-all-annotated.png')
+```
+
+
+
+---
+name: cheatsheet
+class: left
+
+.blockquote[Intro to ggplot2]
+
+## Der ggplot2-Spickzettel
+
+```{r}
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '90%'
+knitr::include_graphics('https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-visualization-cheatsheet-thumbs.png')
+
+```
+
+
+.quelle[[pdf-Download](https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf)]
+
+---
+layout: false
+class: inverse center middle text-white
+
+.font200[Ein Beispiel]
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Beispiel: Entwicklung der Bevölkerungsstruktur in D
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-align: 'center'
+#| out-width: '60%'
+# Setup ----
+source(xfun::from_root('R','00_setup.R'))
+# Daten importieren -----
+
+## filename ----
+date <- '2023-04-16'
+my_in_file <- glue::glue('bev_struktur_{date}.rds')
+
+## load ----
+load(file=xfun::from_root('data','tidy',my_in_file))
+tbl_pop <- bev_struktur
+#tbl_pop <- read_rds(xfun::from_root('data','tidy',my_in_file))
+tbl_plot <- tbl_pop %>%
+  mutate(Anzahl = if_else(Geschlecht=="m",
+                          Anzahl*(-1),
+                          Anzahl)
+  )
+
+
+### Farbpalette ----
+ISBAblue <- '#232461'
+ISBAred <- '#d84116'
+mycols <- c(ISBAblue,ISBAred)
+
+### Plots erzeugen -----
+
+#### Fig3 Bevölkerungspyramide ----
+p <- ggplot(tbl_plot, aes(x = Alter, y = Anzahl, fill = Geschlecht))
+p <- p  +  geom_bar(data = subset(tbl_plot, Geschlecht == "w"), stat = "identity")
+p <- p  +  geom_bar(data = subset(tbl_plot, Geschlecht == "m"), stat = "identity")
+p <- p  +  scale_y_continuous(breaks=seq(-1000,1000,250),labels=abs(seq(-1000,1000,250)))
+p <- p  +  coord_flip()
+p <- p  +  facet_wrap( ~ Simulationsjahr, ncol=2)
+#p <- p  +  ggtitle("Deutschland")
+p <- p  +  xlab("Alter")
+# p <- p  +ylab("Bevölkerung")
+p <- p  +  labs( y = "Anzahl (in 1000)")
+p <- p  +  guides(fill=guide_legend(title="Geschlecht"))
+#p <- p  + scale_fill_discrete(name="", breaks=c("m", "w"), labels=c("Männer", "Frauen"))
+#p <- p  +  scale_fill_brewer(palette = "Set1",breaks=c("Male", "Female"), labels=c("Männer", "Frauen"))
+p <- p  +  scale_fill_manual(values = mycols, breaks = c("m", "w"),
+                             labels=c("Männer", "Frauen"))
+p <- p  + theme_bw() + theme(legend.position='bottom',
+                             legend.title=element_text(size=rel(.7)),
+                             legend.text = element_text(size=rel(.5)),
+                             axis.text.x=element_text(size=rel(.5)),
+                             axis.text.y=element_text(size=rel(.5)),
+                             axis.title.x = element_text(size=rel(.5)),
+                             axis.title.y = element_text(size=rel(.5))
+)
+p
+```
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Daten importieren
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+# Setup ----
+source(xfun::from_root('R','00_setup.R'))
+```
+
+```{r}
+#| echo: true
+# Daten importieren -----
+## filename ----
+date <- '2023-04-16'
+my_in_file <- glue::glue('bev_struktur_{date}.rds')
+## load rds ----
+load(file=xfun::from_root('data','tidy',my_in_file))
+head(bev_struktur)
+```
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Vereinfachung: Beschränkung auf das Jahr 2021
+
+```{r}
+#| echo: false
+tbl_pop <- bev_struktur %>% 
+                filter(Simulationsjahr==2021)
+head(tbl_pop)
+```
+
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Plot-Objekt erzeugen und Daten übergeben
+
+
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '50%'
+p <- tbl_pop %>% 
+             ggplot()
+p
+```
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Mappings und die `aes()`-Funktion
+
+.panelset[
+.panel[.panel-name[x-Achse]
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '40%'
+p <- tbl_pop %>% 
+             ggplot(aes(x = Alter))
+p
+```
+]
+.panel[.panel-name[y-Achse]
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '40%'
+p <- tbl_pop %>% 
+           ggplot(aes(y = Anzahl))
+p
+```
+]
+]
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Layer hinzufügen
+
+Zusammenspiel von `aes()`- und `geom_()`-Funktionen
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '40%'
+p <- tbl_pop %>% 
+           ggplot(aes(x = Alter, y=Anzahl))
+p <- p + geom_bar(aes(fill = Geschlecht), stat='identity')
+p 
+```
+
+
+
+
+
+
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Layer hinzufügen
+
+Achsen tauschen 
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '40%'
+p + coord_flip()
+```
+
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Achsenmanipulation
+
+```{r}
+#| echo: false
+tbl_plot <- bev_struktur %>% 
+                mutate(Anzahl=if_else(Geschlecht=="w",-Anzahl,Anzahl))
+tbl_plot %>% 
+  arrange(desc(Geschlecht)) %>% head()
+```
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Und nochmal...
+
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '35%'
+p <- tbl_plot %>% 
+           ggplot(aes(x = Alter, y=Anzahl))
+p <- p + geom_bar(aes(fill = Geschlecht), stat='identity')
+p + coord_flip()
+```
+--
+Was stimmt nicht?
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Faceting
+
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '50%'
+p + coord_flip() + facet_wrap(~Simulationsjahr)
+
+```
+
+
+
+
+
+
+---
+class: left
+
+.blockquote[Schritt für Schritt zum Diagramm]
+
+## Final Layout
+
+```{r}
+#| echo: true
+#| fig-align: 'center'
+#| out-width: '25%'
+# Plot zwischenspeichern
+p <- p + coord_flip() + facet_wrap(~Simulationsjahr)
+# Farben definieren
+myCols <- c("#232461","#D84116")
+p + scale_fill_manual(values = myCols,breaks=c("m", "w"), labels=c("Männlich", "Weiblich")) +
+  theme_light() +
+  theme(legend.position="bottom",axis.text=element_text(size=14),
+        axis.title=element_text(size=14,face="bold"),strip.text.x = element_text(size = 16, face = "bold"),
+        legend.title=element_text(size=14,face="bold"),legend.text=element_text(size=14),panel.spacing.x = unit( 1, "cm" ),
+        panel.spacing.y = unit( 0.5, "cm" ))
+```
+
+---
+name: PyrCH 
+class: left
+
+.blockquote[Übung]
+
+## Erzeugt ein Diagramm zum Schweizer Bevölkerungsaufbau
+
+* Die Daten gibt es hier:
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_url('https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung/stand-entwicklung.html',height = "440px")
+```
+
+
+---
+name: EndHanks
+class: center
+
+background-size: 75%
+background-image: url(https://media.giphy.com/media/KJ1f5iTl4Oo7u/giphy.gif)

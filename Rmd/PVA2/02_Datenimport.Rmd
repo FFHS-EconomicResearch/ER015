@@ -65,7 +65,7 @@ library(fontawesome)
 <br>
 <br>
 <br>
-### HS 2023 
+### HS 2025-26 
 <br>
 ### Prof. Dr. Jörg Schoder
 .mycontacts[
