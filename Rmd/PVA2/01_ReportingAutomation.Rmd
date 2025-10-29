@@ -967,8 +967,9 @@ class: left
 
 ## Hilfreiche Quellen zum Nachschlagen
 
+- [Quarto Guide](https://quarto.org/docs/guide/)
 
-- Umfassend: [RMarkdown - The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+- [RMarkdown - The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
 
 - Kompakt: [Cheatsheet "Rmarkdown
 2.0"](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
@@ -1150,11 +1151,16 @@ knitr::include_graphics('https://i.makeagif.com/media/10-08-2015/koAH4x.gif')
 .left-column[
 Wo gibt es Hilfe? 
 
-* [StackOverflow](https://stackoverflow.com/)
+* [Claude.ai](https://claude.ai)
+
+* [ChatGPT](https://chat.openai.com/)
 
 * [RStudio/Posit Community](https://community.rstudio.com/)
 
-* [ChatGPT](https://chat.openai.com/)
+* [StackOverflow](https://stackoverflow.com/)
+
+
+
 
 * ...
 ]
