@@ -77,7 +77,7 @@ bib <- ReadBib(xfun::from_root("lit","my_bib.bib"))
 <br>
 <br>
 <br>
-### HS 2024 
+### HS 2025-26 
 <br>
 ### Prof. Dr. Jörg Schoder
 .mycontacts[
@@ -440,7 +440,7 @@ knitr::include_graphics(xfun::from_root('img','PVA3','storyboard.png'))
 .panel[.panel-name[Beispiel]
 ```{r}
 #| echo: false
-knitr::include_url('https://testing-apps.shinyapps.io/flexdashboard-storyboard/',height='440px')
+knitr::include_url('https://testing-apps.shinyapps.io/flexdashboard-storyboard/',height='420px')
 ```
 
 ]
