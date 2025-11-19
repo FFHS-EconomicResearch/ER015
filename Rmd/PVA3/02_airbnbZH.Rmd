@@ -15,12 +15,13 @@ library(tidyverse)
 library(fontawesome)
 library(DT)
 ```
+
 ```{r}
 #| label: get-data
 #http://insideairbnb.com/get-the-data/
-ZH_listings <- fread('http://data.insideairbnb.com/switzerland/z%C3%BCrich/zurich/2023-09-24/data/listings.csv.gz')
+ZH_listings <- fread("https://data.insideairbnb.com/switzerland/z%C3%BCrich/zurich/2025-06-27/data/listings.csv.gz")
 
-ZH_locations <- geojsonsf::geojson_sf("http://data.insideairbnb.com/switzerland/z%C3%BCrich/zurich/2023-09-24/visualisations/neighbourhoods.geojson")
+ZH_locations <- geojsonsf::geojson_sf("https://data.insideairbnb.com/switzerland/z%C3%BCrich/zurich/2025-06-27/visualisations/neighbourhoods.geojson")
 
 ```
 
